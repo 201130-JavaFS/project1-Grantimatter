@@ -12,6 +12,6 @@ class UserQueryServiceImplTest {
     @Test
     void testGetUserFromLogin() {
         User grant = userQueryService.getUserFromLogin("grant.wiswell", "password");
-        if(grant != null) log.info(grant);
+        if(grant != null) log.info("User Grant: " + grant);
     }
 }

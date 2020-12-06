@@ -1,4 +1,4 @@
-package com.revature.ers.service;
+package com.revature.ers.service.impl.util;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;

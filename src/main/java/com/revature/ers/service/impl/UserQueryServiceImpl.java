@@ -4,7 +4,7 @@ import com.revature.ers.dao.UserQueryDao;
 import com.revature.ers.dao.impl.UserQueryDaoImpl;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.User;
-import com.revature.ers.service.Encryption;
+import com.revature.ers.service.impl.util.Encryption;
 import com.revature.ers.service.PasswordQueryService;
 import com.revature.ers.service.UserQueryService;
 import org.apache.log4j.Logger;

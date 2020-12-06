@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Reimbursement {
     int id;
-    int amount;
+    double amount;
     int author_id;
     int resolver_id;
     int type_id;
@@ -13,26 +13,27 @@ public class Reimbursement {
     Timestamp submitted;
     Timestamp resolved;
 
-    public Reimbursement(int id, int amount, int author_id, int resolver_id, int type_id, int status_id, String description, Timestamp submitted, Timestamp resolved) {
-        this.id = id;
+    public Reimbursement(double amount, int author_id, int type_id) {
         this.amount = amount;
         this.author_id = author_id;
-        this.resolver_id = resolver_id;
         this.type_id = type_id;
+    }
+
+    public Reimbursement(int id, double amount, int author_id, int type_id, int status_id, Timestamp submitted) {
+        this(amount, author_id, type_id);
+        this.id = id;
         this.status_id = status_id;
-        this.description = description;
         this.submitted = submitted;
+    }
+
+    public Reimbursement(int id, double amount, int author_id, int resolver_id, int type_id, int status_id, String description, Timestamp submitted, Timestamp resolved) {
+        this(id, amount, author_id, type_id, status_id, submitted);
+        this.resolver_id = resolver_id;
+        this.description = description;
         this.resolved = resolved;
     }
 
-    public Reimbursement(int id, int amount, int author_id, int type_id, int status_id, Timestamp submitted) {
-        this.id = id;
-        this.amount = amount;
-        this.author_id = author_id;
-        this.type_id = type_id;
-        this.status_id = status_id;
-        this.submitted = submitted;
-    }
+
 
     public int getId() {
         return id;
@@ -42,7 +43,7 @@ public class Reimbursement {
         this.id = id;
     }
 
-    public int getAmount() {
+    public double getAmount() {
         return amount;
     }
 
@@ -104,5 +105,20 @@ public class Reimbursement {
 
     public void setResolved(Timestamp resolved) {
         this.resolved = resolved;
+    }
+
+    @Override
+    public String toString() {
+        return "Reimbursement{" +
+                "id=" + id +
+                ", amount=" + amount +
+                ", author_id=" + author_id +
+                ", resolver_id=" + resolver_id +
+                ", type='" + type_id + '\'' +
+                ", status='" + status_id + '\'' +
+                ", description='" + description + '\'' +
+                ", submitted=" + submitted +
+                ", resolved=" + resolved +
+                '}';
     }
 }
