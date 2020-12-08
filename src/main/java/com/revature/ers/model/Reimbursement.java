@@ -3,12 +3,13 @@ package com.revature.ers.model;
 import java.sql.Timestamp;
 
 public class Reimbursement {
+
     int id;
     double amount;
     int author_id;
     int resolver_id;
-    int type_id;
     int status_id;
+    int type_id;
     String description;
     Timestamp submitted;
     Timestamp resolved;
@@ -32,8 +33,6 @@ public class Reimbursement {
         this.description = description;
         this.resolved = resolved;
     }
-
-
 
     public int getId() {
         return id;
@@ -65,14 +64,6 @@ public class Reimbursement {
 
     public void setResolver_id(int resolver_id) {
         this.resolver_id = resolver_id;
-    }
-
-    public int getType_id() {
-        return type_id;
-    }
-
-    public void setType_id(int type_id) {
-        this.type_id = type_id;
     }
 
     public int getStatus_id() {
@@ -107,14 +98,22 @@ public class Reimbursement {
         this.resolved = resolved;
     }
 
+    public int getType_id() {
+        return type_id;
+    }
+
+    public void setType(int type_id) {
+        this.type_id = type_id;
+    }
+
     @Override
     public String toString() {
-        return "Reimbursement{" +
+        return "Reimbursement {" +
                 "id=" + id +
                 ", amount=" + amount +
                 ", author_id=" + author_id +
                 ", resolver_id=" + resolver_id +
-                ", type='" + type_id + '\'' +
+                ", type_id='" + type_id + '\'' +
                 ", status='" + status_id + '\'' +
                 ", description='" + description + '\'' +
                 ", submitted=" + submitted +

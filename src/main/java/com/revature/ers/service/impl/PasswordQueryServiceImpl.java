@@ -22,4 +22,14 @@ public class PasswordQueryServiceImpl implements PasswordQueryService {
         }
         return password;
     }
+
+    @Override
+    public boolean createNewPassword(Password password) throws ErsException {
+        try{
+            return passwordQueryDao.createNewPassword(password);
+        } catch (ErsException e) {
+            log.warn(e.getMessage(), e);
+        }
+        return false;
+    }
 }

@@ -5,4 +5,5 @@ import com.revature.ers.model.Password;
 
 public interface PasswordQueryDao {
     public Password getPasswordFromUserId(int id) throws ErsException;
+    public boolean createNewPassword(Password password) throws ErsException;
 }

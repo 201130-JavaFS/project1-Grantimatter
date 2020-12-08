@@ -3,6 +3,7 @@ package com.revature.ers.model;
 import java.util.List;
 
 public class User {
+
     private int id;
     private int role_id;
     private String username;
@@ -11,13 +12,17 @@ public class User {
     private String email;
     private List<Reimbursement> reimbursementList;
 
-    public User(int id, int role_id, String username, String first_name, String last_name, String email) {
-        this.id = id;
+    public User(int role_id, String username, String first_name, String last_name, String email) {
         this.role_id = role_id;
         this.username = username;
         this.first_name = first_name;
         this.last_name = last_name;
         this.email = email;
+    }
+
+    public User(int id, int role_id, String username, String first_name, String last_name, String email) {
+        this(role_id, username, first_name, last_name, email);
+        this.id = id;
     }
 
     public int getId() {

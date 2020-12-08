@@ -20,4 +20,24 @@ public class UpdateReimbursementServiceImpl implements UpdateReimbursementServic
         }
         return false;
     }
+
+    @Override
+    public boolean approveReimbursement(Reimbursement reimbursement) throws ErsException {
+        try{
+            return updateReimbursementDao.approveReimbursement(reimbursement);
+        } catch (ErsException e) {
+            log.error(e.getMessage(), e);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean denyReimbursement(Reimbursement reimbursement) throws ErsException {
+        try{
+            return updateReimbursementDao.denyReimbursement(reimbursement);
+        } catch (ErsException e) {
+            log.error(e.getMessage(), e);
+        }
+        return false;
+    }
 }

@@ -22,4 +22,14 @@ public class PasswordQueryDaoImpl implements PasswordQueryDao {
         }
         return password;
     }
+
+    @Override
+    public boolean createNewPassword(Password password) throws ErsException {
+        try{
+            return Queries.sendUpdate(PasswordQueries.CREATE_NEW_PASSWORD, password.getUserId(), password.getEncrypted(), password.getSalt()) > 0;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        throw new ErsException("Unknown error, please contact SysAdmin");
+    }
 }

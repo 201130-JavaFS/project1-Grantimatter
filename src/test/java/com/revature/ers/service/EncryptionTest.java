@@ -13,7 +13,7 @@ class EncryptionTest {
         String salt = Encryption.getSalt(30);
         String givenSalt = "9x1tUlIoOkKJzyVxjin9XiBhTjYb8B";
         String rawPassword = "password";
-        String encrypted = Encryption.generateSecurePassword(rawPassword, givenSalt);
+        String encrypted = Encryption.generateSecurePassword(rawPassword, salt);
         log.info(String.format("Raw: %s", rawPassword));
         log.info(String.format("Encrypted: %s", encrypted));
         log.info(String.format("Generated Salt: %s", salt));

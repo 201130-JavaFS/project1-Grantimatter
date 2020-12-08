@@ -7,6 +7,7 @@ import com.revature.ers.model.User;
 import com.revature.ers.service.ReimbursementQueryService;
 import com.revature.ers.service.UserQueryService;
 import org.apache.log4j.Logger;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -33,6 +34,24 @@ class ReimbursementQueryServiceImplTest {
 
         for (Reimbursement r:reimbursementList) {
             log.info(r);
+        }
+
+        Reimbursement newReimbursement = reimbursementQueryService.getReimbursementFromId(10);
+        log.info(String.format("Reimbursement found with id %d %s", newReimbursement.getId(), newReimbursement));
+    }
+
+    @Test
+    void testGetReimbursementsFromStatus(){
+        List<Reimbursement> reimbursementList = reimbursementQueryService.getReimbursementFromStatus(1);
+        assert(reimbursementList.size() > 0);
+    }
+
+    @Test
+    void testGetAllReimbursements(){
+        List<Reimbursement> reimbursementList = reimbursementQueryService.getAllReimbursements();
+        assert(reimbursementList.size() > 0);
+        for(Reimbursement r:reimbursementList){
+            log.info(String.format("ALL REIMBURSEMENTS: %S", reimbursementList));
         }
     }
 }

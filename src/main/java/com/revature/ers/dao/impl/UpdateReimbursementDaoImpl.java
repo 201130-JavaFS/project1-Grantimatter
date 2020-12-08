@@ -19,4 +19,24 @@ public class UpdateReimbursementDaoImpl implements UpdateReimbursementDao {
         }
         return false;
     }
+
+    @Override
+    public boolean approveReimbursement(Reimbursement reimbursement) throws ErsException {
+        try{
+            return Queries.sendUpdate(ReimbursementQueries.APPROVE_REIMBURSEMENT, reimbursement.getId()) > 0;
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean denyReimbursement(Reimbursement reimbursement) throws ErsException {
+        try {
+            return Queries.sendUpdate(ReimbursementQueries.DENY_REIMBURSEMENT, reimbursement.getId()) > 0;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
 }

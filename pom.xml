@@ -37,5 +37,12 @@
       <artifactId>mockito-core</artifactId>
       <version>1.10.19</version>
     </dependency>
+
+    <dependency>
+      <groupId>org.hibernate</groupId>
+      <artifactId>hibernate-agroal</artifactId>
+      <version>5.4.25.Final</version>
+    </dependency>
+
   </dependencies>
 </project>
