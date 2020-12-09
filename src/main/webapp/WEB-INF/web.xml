@@ -2,11 +2,107 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
   <display-name>project-1</display-name>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
-    <welcome-file>index.htm</welcome-file>
-    <welcome-file>index.jsp</welcome-file>
-    <welcome-file>default.html</welcome-file>
-    <welcome-file>default.htm</welcome-file>
-    <welcome-file>default.jsp</welcome-file>
+    <welcome-file>pages/home.html</welcome-file>
   </welcome-file-list>
+
+  <!--This defines the servlet for the deployment descriptor.-->
+
+  <servlet>
+    <description></description>
+    <display-name>LoginServlet</display-name>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.revature.ers.servlet.LoginServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <description></description>
+    <display-name>SuccessServlet</display-name>
+    <servlet-name>SuccessServlet</servlet-name>
+    <servlet-class>com.revature.ers.servlet.SuccessServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <description></description>
+    <display-name>LogoutServlet</display-name>
+    <servlet-name>LogoutServlet</servlet-name>
+    <servlet-class>com.revature.ers.servlet.LogoutServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <description></description>
+    <display-name>TestServlet</display-name>
+    <servlet-name>TestServlet</servlet-name>
+    <servlet-class>com.revature.ers.servlet.TestServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <description></description>
+    <display-name>ReimbursementServlet</display-name>
+    <servlet-name>ReimbursementServlet</servlet-name>
+    <servlet-class>com.revature.ers.servlet.DisplayReimbursementServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <description></description>
+    <display-name>HomePage</display-name>
+    <servlet-name>HomePage</servlet-name>
+    <servlet-class>com.revature.ers.servlet.pages.HomePage</servlet-class>
+  </servlet>
+
+  <servlet>
+    <description></description>
+    <display-name>LoginPage</display-name>
+    <servlet-name>LoginPage</servlet-name>
+    <servlet-class>com.revature.ers.servlet.pages.LoginPage</servlet-class>
+  </servlet>
+
+    <servlet>
+      <description></description>
+      <display-name>ReimbursementsPage</display-name>
+      <servlet-name>ReimbursementsPage</servlet-name>
+      <servlet-class>com.revature.ers.servlet.pages.ReimbursementPage</servlet-class>
+    </servlet>
+
+  <!--This will map the above servlet to a URL location. The URL pattern is added to the base URL of the application-->
+
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/submit-login</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>SuccessServlet</servlet-name>
+    <url-pattern>/success</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>LogoutServlet</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>TestServlet</servlet-name>
+    <url-pattern>/test</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ReimbursementServlet</servlet-name>
+    <url-pattern>/reimbursement</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>HomePage</servlet-name>
+    <url-pattern>/home</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>LoginPage</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>ReimbursementsPage</servlet-name>
+    <url-pattern>/reimbursements</url-pattern>
+  </servlet-mapping>
+
 </web-app>

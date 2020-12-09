@@ -1,5 +1,7 @@
 package com.revature.ers.model;
 
+import jdk.nashorn.internal.ir.debug.JSONWriter;
+
 import java.sql.Timestamp;
 
 public class Reimbursement {
@@ -108,16 +110,16 @@ public class Reimbursement {
 
     @Override
     public String toString() {
-        return "Reimbursement {" +
-                "id=" + id +
-                ", amount=" + amount +
-                ", author_id=" + author_id +
-                ", resolver_id=" + resolver_id +
-                ", type_id='" + type_id + '\'' +
-                ", status='" + status_id + '\'' +
-                ", description='" + description + '\'' +
-                ", submitted=" + submitted +
-                ", resolved=" + resolved +
-                '}';
+        return "{" +
+                "\"id\"=" + id +
+                ", \"amount\"=" + amount +
+                ", \"author_id\"=" + author_id +
+                ", \"resolver_id\"=" + resolver_id +
+                ", \"type_id\"=" + type_id +
+                ", \"status\"=" + status_id +
+                ", \"description\"=" + description +
+                ", \"submitted\"=\"" + submitted +"\"" +
+                ", \"resolved\"=" + resolved +
+                "}";
     }
 }

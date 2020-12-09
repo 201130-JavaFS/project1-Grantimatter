@@ -1,19 +1,15 @@
 package com.revature.ers.service.impl;
 
-import com.revature.ers.dao.impl.util.ReimbursementUtil;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Reimbursement;
 import com.revature.ers.model.User;
 import com.revature.ers.service.ReimbursementQueryService;
 import com.revature.ers.service.UserQueryService;
 import org.apache.log4j.Logger;
-import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ReimbursementQueryServiceImplTest {
     Logger log = Logger.getLogger(ReimbursementQueryServiceImplTest.class);
