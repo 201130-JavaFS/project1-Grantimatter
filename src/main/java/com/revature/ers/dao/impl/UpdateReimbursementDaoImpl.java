@@ -13,9 +13,9 @@ public class UpdateReimbursementDaoImpl implements UpdateReimbursementDao {
     @Override
     public boolean createReimbursement(Reimbursement reimbursement) throws ErsException {
         try{
-            return Queries.sendUpdate(ReimbursementQueries.CREATE_REIMBURSEMENT, reimbursement.getAmount(), reimbursement.getAuthor_id(), reimbursement.getType_id()) > 0;
+            return Queries.sendUpdate(ReimbursementQueries.CREATE_REIMBURSEMENT, reimbursement.getAmount(), reimbursement.getAuthor_id(), reimbursement.getType_id(), reimbursement.getDescription()) > 0;
         } catch (Exception e) {
-            log.error(e.getMessage(), e);
+            log.error(e);
         }
         return false;
     }

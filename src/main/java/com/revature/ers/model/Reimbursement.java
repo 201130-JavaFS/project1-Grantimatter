@@ -1,38 +1,57 @@
 package com.revature.ers.model;
 
-import jdk.nashorn.internal.ir.debug.JSONWriter;
+import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Objects;
 
 public class Reimbursement {
 
     int id;
-    double amount;
+    BigDecimal amount;
     int author_id;
     int resolver_id;
     int status_id;
     int type_id;
     String description;
-    Timestamp submitted;
-    Timestamp resolved;
+    Date submitted;
+    Date resolved;
 
-    public Reimbursement(double amount, int author_id, int type_id) {
+    public Reimbursement(){
+
+    }
+
+    public Reimbursement(BigDecimal amount, int author_id, int type_id) {
         this.amount = amount;
         this.author_id = author_id;
         this.type_id = type_id;
     }
 
-    public Reimbursement(int id, double amount, int author_id, int type_id, int status_id, Timestamp submitted) {
+    public Reimbursement(BigDecimal amount, int author_id, int type_id, String description) {
+        this(amount, author_id, type_id);
+        this.description = description;
+    }
+
+    public Reimbursement(int id, BigDecimal amount, int author_id, int type_id, int status_id, Timestamp submitted) {
         this(amount, author_id, type_id);
         this.id = id;
         this.status_id = status_id;
         this.submitted = submitted;
     }
 
-    public Reimbursement(int id, double amount, int author_id, int resolver_id, int type_id, int status_id, String description, Timestamp submitted, Timestamp resolved) {
-        this(id, amount, author_id, type_id, status_id, submitted);
-        this.resolver_id = resolver_id;
+    public Reimbursement(int id, BigDecimal amount, int author_id, int type_id, String description, int status_id, Timestamp submitted) {
+        this(amount, author_id, type_id);
+        this.id = id;
+        this.status_id = status_id;
         this.description = description;
+        this.submitted = submitted;
+    }
+
+    public Reimbursement(int id, BigDecimal amount, int author_id, int resolver_id, int type_id, int status_id, String description, Timestamp submitted, Timestamp resolved) {
+        this(id, amount, author_id, type_id, description, status_id, submitted);
+        this.resolver_id = resolver_id;
         this.resolved = resolved;
     }
 
@@ -44,11 +63,11 @@ public class Reimbursement {
         this.id = id;
     }
 
-    public double getAmount() {
+    public BigDecimal getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
 
@@ -84,7 +103,7 @@ public class Reimbursement {
         this.description = description;
     }
 
-    public Timestamp getSubmitted() {
+    public Date getSubmitted() {
         return submitted;
     }
 
@@ -92,7 +111,7 @@ public class Reimbursement {
         this.submitted = submitted;
     }
 
-    public Timestamp getResolved() {
+    public Date getResolved() {
         return resolved;
     }
 
@@ -106,6 +125,19 @@ public class Reimbursement {
 
     public void setType(int type_id) {
         this.type_id = type_id;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reimbursement that = (Reimbursement) o;
+        return id == that.id && author_id == that.author_id && resolver_id == that.resolver_id && status_id == that.status_id && type_id == that.type_id && Objects.equals(amount, that.amount) && Objects.equals(description, that.description) && Objects.equals(submitted, that.submitted) && Objects.equals(resolved, that.resolved);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, amount, author_id, resolver_id, status_id, type_id, description, submitted, resolved);
     }
 
     @Override

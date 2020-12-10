@@ -1,25 +1,24 @@
 package com.revature.ers.servlet;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.model.User;
-import com.revature.ers.service.ReimbursementQueryService;
 import com.revature.ers.service.UserQueryService;
-import com.revature.ers.service.impl.ReimbursementQueryServiceImpl;
 import com.revature.ers.service.impl.UserQueryServiceImpl;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 public class LoginServlet extends HttpServlet {
 
     UserQueryService userQueryService = new UserQueryServiceImpl();
-    ReimbursementQueryService reimbursementQueryService = new ReimbursementQueryServiceImpl();
+    private ObjectMapper objectMapper = new ObjectMapper();
 
     static Logger log = Logger.getLogger(LoginServlet.class);
 
@@ -28,28 +27,36 @@ public class LoginServlet extends HttpServlet {
         String username = req.getParameter("employeeEmail");
         String password = req.getParameter("employeePassword");
 
-        //log.info(String.format("Username: %s Password:%s", username, password));
-
-        RequestDispatcher rd = null;
-        PrintWriter pw = resp.getWriter();
-
         if(username != null && username.length() > 0 && password != null && password.length() > 0){
             User user = userQueryService.getUserFromLogin(username, password);
+            String json = objectMapper.writeValueAsString(user);
+            log.info("Json User: " + json);
+
+            RequestDispatcher rd = null;
 
             if(user != null){
-                //pw.println(String.format("User found!<br>%s", user));
-
-                // When getting the request dispatcher I can state the relative path I want to forward to.
-                rd = req.getRequestDispatcher("success");
-                rd.forward(req, resp);
+                resp = createUserCookies(resp, user);
+                resp.sendRedirect("home");
             }else{
                 rd = req.getRequestDispatcher("home");
                 rd.include(req, resp);
-                pw.print("<span style=\"color:red; text-align:center;\">Invalid Login Credentials</span>");
             }
-            //return;
         }
+    }
 
-        //resp.setStatus(200);
+    private HttpServletResponse createUserCookies(HttpServletResponse resp, User user){
+        Cookie userCookie = new Cookie("LoggedUser", user.getUsername());
+        userCookie.setDomain("localhost");
+        userCookie.setComment("This is the currently logged in user");
+        resp.addCookie(userCookie);
+        Cookie userIdCookie = new Cookie("UserId", Integer.toString(user.getId()));
+        userIdCookie.setDomain("localhost");
+        userIdCookie.setComment("This is the logged in user's id");
+        resp.addCookie(userIdCookie);
+        Cookie userFullName = new Cookie("UserFullName", String.format("%s_%s", user.getFirst_name(), user.getLast_name()));
+        userFullName.setDomain("localhost");
+        userFullName.setComment("This is the name of the logged in user");
+        resp.addCookie(userFullName);
+        return resp;
     }
 }

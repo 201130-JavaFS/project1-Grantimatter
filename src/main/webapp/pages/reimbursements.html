@@ -38,30 +38,7 @@
                         </tr>
                     </thead>
                     <tbody id="reimb_table_body">
-                        <tr class="row-hover">
-                            <th scope="row">4</th>
-                            <td>$12.42</td>
-                            <td>Pending</td>
-                            <td>Food</td>
-                            <td>Food on the road</td>
-                            <td>2020-12-05 21:11:54</td>
-                        </tr>
-                        <tr class="reimb-approved">
-                            <th scope="row">2</th>
-                            <td>$123.42</td>
-                            <td>Approved</td>
-                            <td>Other</td>
-                            <td>Flat tire in company vehicle</td>
-                            <td>2020-12-05 21:11:54</td>
-                        </tr>
-                        <tr class="reimb-denied">
-                            <th scope="row">1</th>
-                            <td>$618.73</td>
-                            <td>Denied</td>
-                            <td>Lodging</td>
-                            <td>Weekend stay on business</td>
-                            <td>2020-12-05 21:11:54</td>
-                        </tr>
+                        
                     </tbody>
                 </table>
 
@@ -82,8 +59,8 @@
                         </button>
                     </div>
                     <div class="modal-body dark-background">
-                        <form id="new_reimb_form" class="needs-validation dark-background">
-                            <div class="form-row">
+                        <form id="new_reimb_form" class="needs-validation dark-background" action="reimb-submit" method="POST">
+                            <div class="form-row" >
                                 <!--Amount input-->
                                 <div class="form-group col-md-6">
                                     <label for="reimb_amount">Amount</label>
@@ -91,7 +68,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text form-dark-disabled">$</span>
                                         </div>
-                                        <input id="reimb_amount" type="text" class="form-control form-dark-enabled"
+                                        <input id="reimb_amount" name="reimb_amount" type="text" class="form-control form-dark-enabled"
                                             aria-label="Amount" required>
                                         <div class="invalid-tooltip">
                                             Please provide a valid dollar amount.
@@ -107,7 +84,7 @@
                                             <label class="input-group-text form-dark-disabled"
                                                 for="reimb_type">Reason</label>
                                         </div>
-                                        <select class="custom-select form-dark-enabled" id="reimb_type" required>
+                                        <select class="custom-select form-dark-enabled" name="reimb_type_id" id="reimb_type_id" required>
                                             <option selected disabled style="color: gray;">Choose...</option>
                                             <option value="0">Lodging</option>
                                             <option value="1">Travel</option>
@@ -125,7 +102,7 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text form-dark-disabled">Description</span>
                                 </div>
-                                <textarea id="reimb_description" class="form-control form-dark-enabled"
+                                <textarea id="reimb_description" name="reimb_description" class="form-control form-dark-enabled"
                                     aria-label="Reimbursement description"></textarea>
                             </div>
                             <br>
@@ -139,7 +116,7 @@
                                     <span class="input-group-text form-dark-disabled" id="reimb_receipt">Receipt</span>
                                 </div>
                                 <div class="custom-file">
-                                    <input type="file" class="custom-file-input" id="reimb_receipt"
+                                    <input type="file" class="custom-file-input" id="reimb_receipt" name="reimb_receipt"
                                         aria-describedby="reimb_receipt">
                                     <label class="custom-file-label form-dark-enabled" for="reimb_receipt">Choose
                                         file</label>
@@ -149,7 +126,7 @@
                             <!--<br>-->
                             <div class="modal-footer" style="border-color: gray">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button id="submit_reimb" type="submit" class="btn btn-primary">Submit</button>
+                                <button type="submit" id="submit_reimb"  class="btn btn-primary">Submit</button>
                             </div>
                         </form>
                     </div>

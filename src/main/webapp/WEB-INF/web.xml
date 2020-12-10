@@ -37,9 +37,16 @@
 
   <servlet>
     <description></description>
-    <display-name>ReimbursementServlet</display-name>
-    <servlet-name>ReimbursementServlet</servlet-name>
-    <servlet-class>com.revature.ers.servlet.DisplayReimbursementServlet</servlet-class>
+    <display-name>SubmitReimbursementServlet</display-name>
+    <servlet-name>SubmitReimbursementServlet</servlet-name>
+    <servlet-class>com.revature.ers.servlet.SubmitReimbursementServlet</servlet-class>
+  </servlet>
+
+  <servlet>
+    <description></description>
+    <display-name>RetrieveReimbursementsServlet</display-name>
+    <servlet-name>RetrieveReimbursementsServlet</servlet-name>
+    <servlet-class>com.revature.ers.servlet.ReceiveReimbursementServlet</servlet-class>
   </servlet>
 
   <servlet>
@@ -86,8 +93,13 @@
   </servlet-mapping>
 
   <servlet-mapping>
-    <servlet-name>ReimbursementServlet</servlet-name>
-    <url-pattern>/reimbursement</url-pattern>
+    <servlet-name>SubmitReimbursementServlet</servlet-name>
+    <url-pattern>/reimb-submit</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
+    <servlet-name>RetrieveReimbursementsServlet</servlet-name>
+    <url-pattern>/reimb-get</url-pattern>
   </servlet-mapping>
 
   <servlet-mapping>

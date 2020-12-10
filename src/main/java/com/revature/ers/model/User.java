@@ -1,6 +1,7 @@
 package com.revature.ers.model;
 
 import java.util.List;
+import java.util.Objects;
 
 public class User {
 
@@ -12,7 +13,12 @@ public class User {
     private String email;
     private List<Reimbursement> reimbursementList;
 
+    public User(){
+        super();
+    }
+
     public User(int role_id, String username, String first_name, String last_name, String email) {
+        super();
         this.role_id = role_id;
         this.username = username;
         this.first_name = first_name;
@@ -79,6 +85,19 @@ public class User {
 
     public void setReimbursementList(List<Reimbursement> reimbursementList) {
         this.reimbursementList = reimbursementList;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return id == user.id && role_id == user.role_id && username.equals(user.username) && first_name.equals(user.first_name) && last_name.equals(user.last_name) && email.equals(user.email) && Objects.equals(reimbursementList, user.reimbursementList);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, role_id, username, first_name, last_name, email, reimbursementList);
     }
 
     @Override

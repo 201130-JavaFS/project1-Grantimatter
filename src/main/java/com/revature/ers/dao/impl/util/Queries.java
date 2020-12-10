@@ -4,6 +4,7 @@ import com.revature.ers.util.jdbutil.PostgresSqlConnection;
 
 import org.apache.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -46,6 +47,8 @@ public class Queries {
                     preparedStatement.setDate(i + 1, (java.sql.Date) objects[i]);
                 } else if(objects[i] instanceof Timestamp){
                     preparedStatement.setTimestamp(i + 1, (Timestamp) objects[i]);
+                } else if(objects[i] instanceof BigDecimal){
+                    preparedStatement.setBigDecimal(i + 1, (BigDecimal) objects[i]);
                 }
             }
             return preparedStatement;

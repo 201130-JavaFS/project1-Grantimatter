@@ -17,9 +17,10 @@ public class ReimbursementUtil {
         try{
             reimbursement = new Reimbursement(
                     resultSet.getInt("reimb_id"),
-                    resultSet.getDouble("reimb_amount"),
+                    resultSet.getBigDecimal("reimb_amount"),
                     resultSet.getInt("reimb_author"),
                     resultSet.getInt("reimb_type_id"),
+                    resultSet.getString("reimb_description"),
                     resultSet.getInt("reimb_status_id"),
                     resultSet.getTimestamp("reimb_submitted")
             );

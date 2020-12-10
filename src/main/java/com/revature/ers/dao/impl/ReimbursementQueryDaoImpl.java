@@ -6,9 +6,11 @@ import com.revature.ers.dao.impl.util.ReimbursementUtil;
 import com.revature.ers.dao.queries.ReimbursementQueries;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Reimbursement;
+import com.revature.ers.util.sorting.SubmittedComparator;
 import org.apache.log4j.Logger;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ReimbursementQueryDaoImpl implements ReimbursementQueryDao {
@@ -19,6 +21,7 @@ public class ReimbursementQueryDaoImpl implements ReimbursementQueryDao {
         Reimbursement reimbursement = null;
         try{
             reimbursement = ReimbursementUtil.getNextReimbursementFromResultSet(Queries.sendQuery(ReimbursementQueries.GET_REIMBURSEMENT_FROM_ID, reimb_id));
+
         } catch (ErsException e) {
             log.error(e.getMessage(), e);
         }
@@ -30,6 +33,8 @@ public class ReimbursementQueryDaoImpl implements ReimbursementQueryDao {
         List<Reimbursement> reimbursementList = new ArrayList<>();
         try{
             reimbursementList = ReimbursementUtil.getReimbursementsFromResultSet(Queries.sendQuery(ReimbursementQueries.GET_REIMBURSEMENT_FROM_AUTHOR_ID, author_id));
+            SubmittedComparator submittedComparator = new SubmittedComparator();
+            Collections.sort(reimbursementList, submittedComparator);
         } catch (ErsException e) {
             log.error(e.getMessage(), e);
         }

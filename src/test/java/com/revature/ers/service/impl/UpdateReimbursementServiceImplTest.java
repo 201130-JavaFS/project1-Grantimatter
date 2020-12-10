@@ -28,12 +28,12 @@ class UpdateReimbursementServiceImplTest {
     @Test
     void testApproveReimbursement(){
         Reimbursement newReimbursement = reimbursementQueryService.getReimbursementFromId(9);
-        log.info(String.format("Approve Reimbursement Successful? %s", updateReimbursementService.approveReimbursement(newReimbursement) ? "Yes!" : "No!"));;
+        //log.info(String.format("Approve Reimbursement Successful? %s", updateReimbursementService.approveReimbursement(newReimbursement) ? "Yes!" : "No!"));;
     }
 
     @Test
     void testDenyReimbursement(){
         Reimbursement newReimbursement = reimbursementQueryService.getReimbursementFromId(11);
-        log.info(String.format("Deny Reimbursement Successful? %s", updateReimbursementService.denyReimbursement(newReimbursement) ? "Yes!" : "No!"));
+        //log.info(String.format("Deny Reimbursement Successful? %s", updateReimbursementService.denyReimbursement(newReimbursement) ? "Yes!" : "No!"));
     }
 }

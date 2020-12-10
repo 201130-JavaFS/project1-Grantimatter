@@ -2,7 +2,6 @@ package com.revature.ers.service.impl;
 
 import com.revature.ers.dao.ReimbursementQueryDao;
 import com.revature.ers.dao.impl.ReimbursementQueryDaoImpl;
-import com.revature.ers.dao.queries.ReimbursementQueries;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Reimbursement;
 import com.revature.ers.service.ReimbursementQueryService;
