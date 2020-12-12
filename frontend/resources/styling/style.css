@@ -38,15 +38,15 @@ hr.solid {
 }
 
 .reimb-approved{
-    background-color: #285028;
+    background-color:  #395739;
 }
 
 @keyframes activateApprove{
-    to{background-color:  #326432;};
+    to{background-color: #426442;};
 }
 
 @keyframes deactivateApprove{
-    to{background-color: #285028;};
+    to{background-color: #395739;};
 }
 
 .reimb-approved-activate{
@@ -60,11 +60,11 @@ hr.solid {
 }
 
 .reimb-denied{
-    background-color: #462323;
+    background-color: #533d3d;
 }
 
 .reimb-denied-active{
-    background-color: #6e3232;
+    background-color: #644242;
 }
 
 .row-hover{

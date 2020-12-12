@@ -8,10 +8,10 @@ import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.io.IOException;
 
@@ -30,13 +30,13 @@ public class LoginServlet extends HttpServlet {
         if(username != null && username.length() > 0 && password != null && password.length() > 0){
             User user = userQueryService.getUserFromLogin(username, password);
             String json = objectMapper.writeValueAsString(user);
-            log.info("Json User: " + json);
 
             RequestDispatcher rd = null;
 
             if(user != null){
-                resp = createUserCookies(resp, user);
-                resp.sendRedirect("home");
+                setupSession(req, resp, user);
+                //resp = createUserCookies(resp, user);
+                resp.sendRedirect("reimbursements");
             }else{
                 rd = req.getRequestDispatcher("home");
                 rd.include(req, resp);
@@ -44,19 +44,13 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
-    private HttpServletResponse createUserCookies(HttpServletResponse resp, User user){
-        Cookie userCookie = new Cookie("LoggedUser", user.getUsername());
-        userCookie.setDomain("localhost");
-        userCookie.setComment("This is the currently logged in user");
-        resp.addCookie(userCookie);
-        Cookie userIdCookie = new Cookie("UserId", Integer.toString(user.getId()));
-        userIdCookie.setDomain("localhost");
-        userIdCookie.setComment("This is the logged in user's id");
-        resp.addCookie(userIdCookie);
-        Cookie userFullName = new Cookie("UserFullName", String.format("%s_%s", user.getFirst_name(), user.getLast_name()));
-        userFullName.setDomain("localhost");
-        userFullName.setComment("This is the name of the logged in user");
-        resp.addCookie(userFullName);
-        return resp;
+    private void setupSession(HttpServletRequest req, HttpServletResponse resp, User user){
+        HttpSession session = req.getSession();
+        session.setAttribute("username", user.getUsername());
+        session.setAttribute("user_email", user.getEmail());
+        session.setAttribute("user_id", user.getId());
+        session.setAttribute("user_role_id", user.getRole_id());
+        session.setAttribute("user_first_name", user.getFirst_name());
+        session.setAttribute("user_last_name", user.getLast_name());
     }
 }

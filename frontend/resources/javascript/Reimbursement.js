@@ -21,7 +21,7 @@ class Reimbursement{
 $("#new_reimb_form").submit(function(e) {
     e.preventDefault();
     let amount = document.getElementById('reimb_amount').value;
-    let reimb = Reimbursement.amountTypeDescriptInstance(parseFloat(amount), $('#reimb_type').val(), $('#reimb_description').val());
+    let reimb = Reimbursement.amountTypeDescriptInstance(parseFloat(amount), $('#reimb_type_id').val(), $('#reimb_description').val());
     //console.log(reimb);
     postData('reimb-submit', reimb);
     $('#new_reimb_form')[0].reset();
@@ -109,12 +109,14 @@ function getFormattedTime(date){
         return minutes;
     }
     let minutes = getMinutes(date.getMinutes());
-    if(hour == 0 || hour == 11){
-        formattedTime += "12" + ":" + minutes + " AM";
+    if(hour == 0){
+        formattedTime += "12:" + minutes + " AM";
     }else if(hour < 11){
-        formattedTime += String((hour + 1) + ":" + minutes + " PM");
-    }else{
-        formattedTime += String((hour - 11 + formattedTime) + ":" + minutes + " PM");
+        formattedTime += String((hour + 1) + ":" + minutes + " AM");
+    }else if(hour > 11){
+        formattedTime += String((hour - 12) + ":" + minutes + " PM");
+    }else if(hour == 11){
+        formattedTime += String("12:"+minutes+" PM");
     }
 
     

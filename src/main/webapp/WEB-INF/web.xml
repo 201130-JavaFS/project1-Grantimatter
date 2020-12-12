@@ -9,6 +9,14 @@
 
   <servlet>
     <description></description>
+    <display-name>MasterServlet</display-name>
+    <servlet-name>MasterServlet</servlet-name>
+    <servlet-class>com.revature.ers.servlet.MasterServlet</servlet-class>
+  </servlet>
+
+  <!--
+  <servlet>
+    <description></description>
     <display-name>LoginServlet</display-name>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>com.revature.ers.servlet.LoginServlet</servlet-class>
@@ -50,6 +58,12 @@
   </servlet>
 
   <servlet>
+    <display-name>NavigateManageReimbursements</display-name>
+    <servlet-name>NavigateManageReimbursements</servlet-name>
+    <servlet-class>com.revature.ers.servlet.pages.ReimbursementManagementPage</servlet-class>
+  </servlet>
+
+  <servlet>
     <description></description>
     <display-name>HomePage</display-name>
     <servlet-name>HomePage</servlet-name>
@@ -69,9 +83,15 @@
       <servlet-name>ReimbursementsPage</servlet-name>
       <servlet-class>com.revature.ers.servlet.pages.ReimbursementPage</servlet-class>
     </servlet>
+    -->
 
   <!--This will map the above servlet to a URL location. The URL pattern is added to the base URL of the application-->
 
+  <servlet-mapping>
+    <servlet-name>MasterServlet</servlet-name>
+    <url-pattern>/*</url-pattern>
+  </servlet-mapping>
+<!--
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/submit-login</url-pattern>
@@ -103,6 +123,11 @@
   </servlet-mapping>
 
   <servlet-mapping>
+    <servlet-name>NavigateManageReimbursements</servlet-name>
+    <url-pattern>/manage</url-pattern>
+  </servlet-mapping>
+
+  <servlet-mapping>
     <servlet-name>HomePage</servlet-name>
     <url-pattern>/home</url-pattern>
   </servlet-mapping>
@@ -116,5 +141,5 @@
     <servlet-name>ReimbursementsPage</servlet-name>
     <url-pattern>/reimbursements</url-pattern>
   </servlet-mapping>
-
+  -->
 </web-app>

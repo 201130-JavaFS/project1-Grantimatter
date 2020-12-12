@@ -1,8 +1,10 @@
 package com.revature.ers.servlet;
 
+import com.revature.ers.exception.ErsException;
+import com.revature.ers.model.User;
 import com.revature.ers.service.UpdateReimbursementService;
 import com.revature.ers.service.impl.UpdateReimbursementServiceImpl;
-import com.revature.ers.servlet.util.Cookies;
+import com.revature.ers.servlet.util.UserUtil;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -18,20 +20,20 @@ public class SubmitReimbursementServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int userId = -1;
-
-        //String userCookie = Cookies.getCookie(req,"UserId");
-        try{
-            userId = Integer.parseInt(Cookies.getCookie(req, "UserId"));
-        } catch (Exception e) {
+        User user = null;
+        try {
+            user = UserUtil.getUserFromSession(req.getSession());
+        } catch (ErsException e) {
             log.error(e.getMessage(), e);
         }
 
-        //Reimbursement newreimb = null;
-
-        if (userId > -1) {
+        if (user != null) {
             updateReimbursementService.createReimbursement(req);
+            resp.setStatus(201);
             resp.sendRedirect("reimbursements");
+        }else{
+            log.warn("No user logged in");
+            resp.setStatus(402);
         }
     }
 }

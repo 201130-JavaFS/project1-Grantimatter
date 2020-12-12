@@ -32,13 +32,13 @@ class ReimbursementQueryServiceImplTest {
             log.info(r);
         }
 
-        Reimbursement newReimbursement = reimbursementQueryService.getReimbursementFromId(10);
+        Reimbursement newReimbursement = reimbursementQueryService.getReimbursementFromId(62);
         log.info(String.format("Reimbursement found with id %d %s", newReimbursement.getId(), newReimbursement));
     }
 
     @Test
     void testGetReimbursementsFromStatus(){
-        List<Reimbursement> reimbursementList = reimbursementQueryService.getReimbursementFromStatus(1);
+        List<Reimbursement> reimbursementList = reimbursementQueryService.getReimbursementFromStatus(0);
         assert(reimbursementList.size() > 0);
     }
 

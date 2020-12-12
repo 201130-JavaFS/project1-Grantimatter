@@ -61,6 +61,7 @@
                     <div class="modal-body dark-background">
                         <form id="new_reimb_form" class="needs-validation dark-background" action="reimb-submit" method="POST">
                             <div class="form-row" >
+
                                 <!--Amount input-->
                                 <div class="form-group col-md-6">
                                     <label for="reimb_amount">Amount</label>
@@ -103,7 +104,7 @@
                                     <span class="input-group-text form-dark-disabled">Description</span>
                                 </div>
                                 <textarea id="reimb_description" name="reimb_description" class="form-control form-dark-enabled"
-                                    aria-label="Reimbursement description"></textarea>
+                                    aria-label="Reimbursement description" maxlength="200"></textarea>
                             </div>
                             <br>
 
@@ -146,8 +147,8 @@
                     src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
                     integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
                     crossorigin="anonymous"></script>
-                <script type="text/javascript" src="resources/javascript/WiswellNav.js"></script>
-                <script type="text/javascript" src="resources/javascript/reimbursement.js"></script>
+                <script type="text/javascript" src="resources/javascript/Navigation.js"></script>
+                <script type="text/javascript" src="resources/javascript/Reimbursement.js"></script>
 </body>
 
 </html>

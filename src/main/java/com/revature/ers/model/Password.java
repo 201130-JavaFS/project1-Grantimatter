@@ -1,5 +1,7 @@
 package com.revature.ers.model;
 
+import java.util.Objects;
+
 public class Password {
     int userId;
     private String encrypted;
@@ -25,5 +27,18 @@ public class Password {
 
     public String getSalt() {
         return salt;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Password password = (Password) o;
+        return userId == password.userId && Objects.equals(encrypted, password.encrypted) && Objects.equals(salt, password.salt);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(userId, encrypted, salt);
     }
 }
