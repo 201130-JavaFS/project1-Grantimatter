@@ -7,6 +7,7 @@ import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Reimbursement;
 import com.revature.ers.service.UpdateReimbursementService;
 import com.revature.ers.service.impl.util.ReadRequest;
+import com.revature.ers.servlet.util.SessionUtil;
 import com.revature.ers.servlet.util.UserUtil;
 import org.apache.log4j.Logger;
 
@@ -22,7 +23,7 @@ public class UpdateReimbursementServiceImpl implements UpdateReimbursementServic
         try{
             String body = ReadRequest.getBody(req);
             Reimbursement reimbursement = objectMapper.readValue(body, Reimbursement.class);
-            reimbursement.setAuthor_id(UserUtil.getUserFromSession(req.getSession()).getId());
+            reimbursement.setAuthor_id(SessionUtil.getUserFromSession(req.getSession()).getId());
             log.info("New Reimbursement! " + reimbursement);
             return updateReimbursementDao.createReimbursement(reimbursement);
         } catch (ErsException | IOException e) {

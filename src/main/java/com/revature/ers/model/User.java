@@ -13,9 +13,7 @@ public class User {
     private String email;
     private List<Reimbursement> reimbursementList;
 
-    public User(){
-        super();
-    }
+    public User(){ }
 
     public User(int role_id, String username, String first_name, String last_name, String email) {
         super();

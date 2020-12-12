@@ -1,7 +1,7 @@
 package com.revature.ers.servlet.pages;
 
 import com.revature.ers.model.User;
-import com.revature.ers.servlet.util.UserUtil;
+import com.revature.ers.servlet.util.SessionUtil;
 import org.apache.log4j.Logger;
 
 import javax.servlet.RequestDispatcher;
@@ -17,7 +17,7 @@ public class ReimbursementManagementPage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = UserUtil.getUserFromSession(req.getSession());
+        User user = SessionUtil.getUserFromSession(req.getSession());
 
         RequestDispatcher rd = req.getRequestDispatcher("reimbursements");
         rd.include(req, resp);

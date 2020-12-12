@@ -1,4 +1,4 @@
-package com.revature.ers.controllers;
+package com.revature.ers.controller;
 
 import com.revature.ers.service.UserCreateService;
 import com.revature.ers.service.UserQueryService;

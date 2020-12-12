@@ -1,6 +1,7 @@
 package com.revature.ers.servlet;
 
-import com.revature.ers.controllers.ReimbursementController;
+import com.revature.ers.controller.LoginController;
+import com.revature.ers.controller.ReimbursementController;
 import org.apache.log4j.Logger;
 
 import javax.servlet.ServletException;
@@ -12,6 +13,7 @@ import java.io.IOException;
 public class MasterServlet extends HttpServlet {
 
     private ReimbursementController reimbursementController = new ReimbursementController();
+    private LoginController loginController = new LoginController();
 
     Logger log = Logger.getLogger(MasterServlet.class);
 
@@ -26,11 +28,10 @@ public class MasterServlet extends HttpServlet {
 
         switch(URI){
             case "reimbursements":
-                log.info("Reimbursements called");
                 reimbursementController.getAllReimbursements(resp);
                 break;
             case "login":
-
+                loginController.login(req, resp);
                 break;
         }
     }
