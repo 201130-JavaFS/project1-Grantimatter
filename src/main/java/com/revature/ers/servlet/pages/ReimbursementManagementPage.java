@@ -17,7 +17,7 @@ public class ReimbursementManagementPage extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        User user = SessionUtil.getUserFromSession(req.getSession());
+        User user = SessionUtil.getUserFromSession(req);
 
         RequestDispatcher rd = req.getRequestDispatcher("reimbursements");
         rd.include(req, resp);

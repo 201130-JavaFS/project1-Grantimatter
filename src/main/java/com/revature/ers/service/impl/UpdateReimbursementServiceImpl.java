@@ -18,35 +18,44 @@ public class UpdateReimbursementServiceImpl implements UpdateReimbursementServic
     Logger log = Logger.getLogger(UpdateReimbursementServiceImpl.class);
     UpdateReimbursementDao updateReimbursementDao = new UpdateReimbursementDaoImpl();
     ObjectMapper objectMapper = new ObjectMapper();
+
     @Override
-    public boolean createReimbursement(HttpServletRequest req) throws ErsException {
+    public boolean createReimbursementMin(Reimbursement reimbursement) throws ErsException {
         try{
-            String body = ReadRequest.getBody(req);
-            Reimbursement reimbursement = objectMapper.readValue(body, Reimbursement.class);
-            reimbursement.setAuthor_id(SessionUtil.getUserFromSession(req.getSession()).getId());
             log.info("New Reimbursement! " + reimbursement);
-            return updateReimbursementDao.createReimbursement(reimbursement);
-        } catch (ErsException | IOException e) {
+            return updateReimbursementDao.createReimbursementMin(reimbursement);
+        } catch (ErsException e) {
             log.warn(e.getMessage(), e);
         }
         return false;
     }
 
     @Override
-    public boolean approveReimbursement(HttpServletRequest req) throws ErsException {
+    public boolean createReimbursement(Reimbursement reimbursement) throws ErsException {
         try{
-            return updateReimbursementDao.approveReimbursement(objectMapper.readValue(ReadRequest.getBody(req), Reimbursement.class));
-        } catch (ErsException | IOException e) {
+            log.info("New Reimbursement! " + reimbursement);
+            return updateReimbursementDao.createReimbursement(reimbursement);
+        } catch (ErsException e) {
+            log.warn(e.getMessage(), e);
+        }
+        return false;
+    }
+
+    @Override
+    public boolean approveReimbursement(Reimbursement reimbursement) throws ErsException {
+        try{
+            return updateReimbursementDao.approveReimbursement(reimbursement);
+        } catch (ErsException e) {
             log.error(e.getMessage(), e);
         }
         return false;
     }
 
     @Override
-    public boolean denyReimbursement(HttpServletRequest req) throws ErsException {
+    public boolean denyReimbursement(Reimbursement reimbursement) throws ErsException {
         try{
-            return updateReimbursementDao.denyReimbursement(objectMapper.readValue(ReadRequest.getBody(req), Reimbursement.class));
-        } catch (ErsException | IOException e) {
+            return updateReimbursementDao.denyReimbursement(reimbursement);
+        } catch (ErsException e) {
             log.error(e.getMessage(), e);
         }
         return false;

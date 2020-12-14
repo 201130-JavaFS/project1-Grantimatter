@@ -6,7 +6,8 @@ import com.revature.ers.model.Reimbursement;
 import javax.servlet.http.HttpServletRequest;
 
 public interface UpdateReimbursementService {
-    public boolean createReimbursement(HttpServletRequest req) throws ErsException;
-    public boolean approveReimbursement(HttpServletRequest req) throws ErsException;
-    public boolean denyReimbursement(HttpServletRequest req) throws ErsException;
+    public boolean createReimbursementMin(Reimbursement reimbursement) throws ErsException;
+    public boolean createReimbursement(Reimbursement reimbursement) throws ErsException;
+    public boolean approveReimbursement(Reimbursement reimbursement) throws ErsException;
+    public boolean denyReimbursement(Reimbursement reimbursement) throws ErsException;
 }

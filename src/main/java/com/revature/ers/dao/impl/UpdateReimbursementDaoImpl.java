@@ -11,6 +11,16 @@ public class UpdateReimbursementDaoImpl implements UpdateReimbursementDao {
     Logger log = Logger.getLogger(UpdateReimbursementDaoImpl.class);
 
     @Override
+    public boolean createReimbursementMin(Reimbursement reimbursement) throws ErsException {
+        try{
+            return Queries.sendUpdate(ReimbursementQueries.CREATE_REIMBURSEMENT_MIN, reimbursement.getAmount(), reimbursement.getAuthor_id(), reimbursement.getType_id()) > 0;
+        } catch (Exception e) {
+            log.error(e);
+        }
+        return false;
+    }
+
+    @Override
     public boolean createReimbursement(Reimbursement reimbursement) throws ErsException {
         try{
             return Queries.sendUpdate(ReimbursementQueries.CREATE_REIMBURSEMENT, reimbursement.getAmount(), reimbursement.getAuthor_id(), reimbursement.getType_id(), reimbursement.getDescription()) > 0;

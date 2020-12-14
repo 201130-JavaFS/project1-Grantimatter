@@ -1,4 +1,8 @@
-class Reimbursement{
+const { event } = require("jquery");
+import $ from 'jquery';
+import _ from 'lodash';
+
+export default class Reimbursement{
     constructor(id, amount, author_id, resolver_id, status_id, type_id, description, submitted, resolved){
         this.id = id;
         this.author_id = author_id;
@@ -17,6 +21,8 @@ class Reimbursement{
         return new Reimbursement(null, amount, null, null, null, type, null, null, null);
     }
 }
+
+$("#new_reimb_form").on(event.cl);
 
 $("#new_reimb_form").submit(function(e) {
     e.preventDefault();
@@ -37,19 +43,6 @@ function createColumn(innerText){
     let column = document.createElement("td");
     column.innerHTML = innerText;
     return column;
-}
-
-function getType(value){
-    switch (value){
-        case "0":
-            return "Lodging";
-        case "1":
-            return "Travel";
-        case "2":
-            return "Food";
-
-        default: return "Other";
-    }
 }
 
 function addAllReimbursementsToTable(reimb_array){
@@ -81,7 +74,7 @@ function addReimbursementToTable(reimbursement){
     reimb_row.appendChild(reimb_id);
     reimb_row.appendChild(addData("$" + Number(reimbursement.amount).toFixed(2)));
     reimb_row.appendChild(addData(getStatus(reimbursement.status_id)));
-    reimb_row.appendChild(addData(getType(reimbursement.type_id)));
+    reimb_row.appendChild(addData(getReimbReason(reimbursement.type_id)));
     reimb_row.appendChild(addData(reimbursement.description));
     reimb_row.appendChild(addData(getFomrattedDate(new Date(Number(reimbursement.submitted)))));
     reimb_table_body.appendChild(reimb_row);
@@ -123,7 +116,7 @@ function getFormattedTime(date){
     return formattedTime;
 }
 
-function getType(type_id){
+function getReimbReason(type_id){
     switch(type_id){
         case 0:
             return "Lodging";
@@ -227,3 +220,5 @@ function setupTableEvents(){
 }
 
 getReimbursements();
+
+$('#header').text(_.startCase(_.toLower(name))).addClass('hello');

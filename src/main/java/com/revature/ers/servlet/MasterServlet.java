@@ -23,17 +23,24 @@ public class MasterServlet extends HttpServlet {
         resp.setStatus(404);
 
         final String URI = req.getRequestURI().replace("/project-1/","").toLowerCase();
-
         log.info("URI: " + URI);
 
         switch(URI){
             case "reimbursements":
-                reimbursementController.getAllReimbursements(resp);
+                reimbursementController.reimbursements(req, resp);
                 break;
             case "login":
                 loginController.login(req, resp);
                 break;
+            case "logout":
+                loginController.logout(req, resp);
+                break;
         }
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
     }
 }
 

@@ -1,3 +1,7 @@
+import $ from 'jquery';
+import _ from 'lodash';
+import './style.css';
+
 class Navbar{
     constructor(brandText, action){
         this.head = document.createElement("header");
@@ -70,9 +74,9 @@ class Navbar{
     }
 }
 
-let nav = new Navbar("Wiswell", ()=>window.open("home", "_self"));
-nav.addLeftListItem("Home", ()=>window.open("home", "_self"));
-
+let nav = new Navbar("Wiswell", ()=>window.open("home.html", "_self"));
+nav.addLeftListItem("Home", ()=>window.open("home.html", "_self"));
+/*
 if(loggedUser){
     nav.addLeftListItem("Reimbursements", ()=>window.open("reimbursements", "_self"));
 }else{
@@ -86,7 +90,7 @@ if(!loggedUser){
     //nav.addRightListItem("Logout", ()=>window.open("logout", "_self"));
     createProfileDropdown();
 }
-
+*/
 function capAll(str){
     strArr = String(str).split('_');
     let capArr = [];

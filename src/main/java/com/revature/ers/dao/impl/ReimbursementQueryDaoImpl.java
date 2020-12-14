@@ -21,7 +21,6 @@ public class ReimbursementQueryDaoImpl implements ReimbursementQueryDao {
         Reimbursement reimbursement = null;
         try{
             reimbursement = ReimbursementUtil.getNextReimbursementFromResultSet(Queries.sendQuery(ReimbursementQueries.GET_REIMBURSEMENT_FROM_ID, reimb_id));
-
         } catch (ErsException e) {
             log.error(e.getMessage(), e);
         }

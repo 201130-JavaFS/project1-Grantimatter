@@ -11,20 +11,23 @@ public class SessionUtil {
 
     static Logger log = Logger.getLogger(SessionUtil.class);
 
-    public static boolean setupLoginSession(HttpSession session, User user){
+    public static boolean setupLoginSession(HttpServletRequest req, User user){
+        HttpSession session = req.getSession();
         session.setAttribute("user_id", user.getId());
         session.setAttribute("user_role_id", user.getRole_id());
         session.setAttribute("username", user.getUsername());
         session.setAttribute("user_first_name", user.getFirst_name());
         session.setAttribute("user_last_name", user.getLast_name());
         session.setAttribute("user_email", user.getEmail());
-        if(getUserFromSession(session) != null){
+        if(getUserFromSession(req) != null){
             return true;
         }
         return false;
     }
 
-    public static User getUserFromSession(HttpSession session) throws ErsException {
+    public static User getUserFromSession(HttpServletRequest req) throws ErsException {
+        HttpSession session = req.getSession(false);
+        if(session == null) return null;
         try {
             int id = Integer.parseInt(session.getAttribute("user_id").toString());
             int role_id = Integer.parseInt(session.getAttribute("user_role_id").toString());
