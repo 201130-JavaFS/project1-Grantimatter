@@ -14,41 +14,48 @@ public class ReimbursementUtil {
 
     public static Reimbursement getReimbursementFromResultSet(ResultSet resultSet){
         Reimbursement reimbursement = null;
-        try{
-            reimbursement = new Reimbursement(
-                    resultSet.getInt("reimb_id"),
-                    resultSet.getBigDecimal("reimb_amount"),
-                    resultSet.getInt("reimb_author"),
-                    resultSet.getInt("reimb_type_id"),
-                    resultSet.getString("reimb_description"),
-                    resultSet.getInt("reimb_status_id"),
-                    resultSet.getTimestamp("reimb_submitted")
-            );
-        } catch (SQLException e) {
-            log.error(e.getMessage());
+        if(resultSet != null){
+            try{
+                reimbursement = new Reimbursement(
+                        resultSet.getInt("reimb_id"),
+                        resultSet.getBigDecimal("reimb_amount"),
+                        resultSet.getInt("reimb_author"),
+                        resultSet.getInt("reimb_type_id"),
+                        resultSet.getString("reimb_description"),
+                        resultSet.getInt("reimb_status_id"),
+                        resultSet.getTimestamp("reimb_submitted")
+                );
+            } catch (SQLException e) {
+                log.error(e.getMessage());
+            }
         }
         return reimbursement;
     }
 
     public static Reimbursement getNextReimbursementFromResultSet(ResultSet resultSet){
-        try {
-            if(resultSet.next()){
-                return getReimbursementFromResultSet(resultSet);
+        if(resultSet != null) {
+            try {
+                if (resultSet.next()) {
+                    return getReimbursementFromResultSet(resultSet);
+                }
+
+            } catch (SQLException e) {
+                log.error(e.getMessage());
             }
-        } catch (SQLException e) {
-            log.error(e.getMessage());
         }
         return null;
     }
 
     public static List<Reimbursement> getReimbursementsFromResultSet(ResultSet resultSet){
         List<Reimbursement> reimbursementList = new ArrayList<>();
-        try {
-            while (resultSet.next()) {
-                reimbursementList.add(getReimbursementFromResultSet(resultSet));
+        if (resultSet != null) {
+            try {
+                while (resultSet.next()) {
+                    reimbursementList.add(getReimbursementFromResultSet(resultSet));
+                }
+            } catch (SQLException e) {
+                log.error(e.getMessage());
             }
-        } catch (SQLException e) {
-            log.error(e.getMessage());
         }
         return reimbursementList;
     }

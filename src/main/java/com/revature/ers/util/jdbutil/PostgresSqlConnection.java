@@ -10,7 +10,8 @@ public class PostgresSqlConnection {
     public static Connection getConnection() throws ClassNotFoundException, SQLException {
         Class.forName(DbUtilProps.DRIVER);
         String username=System.getenv("postgresUserName");
-        String password=System.getenv("postgresPassword");
+        //String password=System.getenv("postgresPassword");
+        String password = System.getenv("awsPassword");
         connection = DriverManager.getConnection(DbUtilProps.URL, username, password);
         return connection;
     }

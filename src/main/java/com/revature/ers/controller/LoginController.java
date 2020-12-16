@@ -9,39 +9,58 @@ import com.revature.ers.servlet.util.RequestUtil;
 import com.revature.ers.servlet.util.SessionUtil;
 import org.apache.log4j.Logger;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 public class LoginController {
 
     static Logger log = Logger.getLogger(LoginController.class);
     UserQueryService userQueryService = new UserQueryServiceImpl();
+    ObjectMapper objectMapper = new ObjectMapper();
 
     public void login(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         log.info("Attempting login");
 
-        if(req.getMethod().equalsIgnoreCase("POST")){
+        if (req.getMethod().equalsIgnoreCase("POST")) {
             String body = RequestUtil.ReadRequestBody(req);
-            ObjectMapper objectMapper = new ObjectMapper();
+            log.info("Request Body: " + body);
+
             LoginDTO loginDTO = objectMapper.readValue(body, LoginDTO.class);
             User user = userQueryService.getUserFromLogin(loginDTO.username, loginDTO.password);
+            String loggedIn = "{\"loggedUser\":\"" + user.getFirst_name() + "_" + user.getLast_name() + "\"}";
 
-            if(user != null){
+            if (user != null) {
                 SessionUtil.setupLoginSession(req, user);
-                resp.getWriter().write("Login Successful!");
-                log.info("User logged in: " + user);
+                String name = String.format("%s_%s", user.getFirst_name(), user.getLast_name()).trim();
+
+                log.info(loggedIn);
+                resp.getWriter().write(loggedIn);
                 resp.setStatus(200);
+            } else {
+                resp.setStatus(401);
+            }
+        } else if (req.getMethod().equalsIgnoreCase("GET")) {
+            HttpSession session = req.getSession(false);
+
+            if(session != null){
+                User user = SessionUtil.getUserFromSession(req);
+                if(user != null){
+                    String loggedUser = String.format("{\"%s\":\"%s_%s\"}", "loggedUser", user.getFirst_name(), user.getLast_name());
+                    resp.getWriter().write(loggedUser);
+                    resp.setStatus(200);
+                }
             }else{
                 resp.setStatus(401);
             }
-        }else if(req.getMethod().equalsIgnoreCase("GET")){
-
         }
     }
 
     public void logout(HttpServletRequest req, HttpServletResponse resp) {
+        resp.addCookie(new Cookie("loggedName", null));
         req.getSession(false).invalidate();
     }
 }

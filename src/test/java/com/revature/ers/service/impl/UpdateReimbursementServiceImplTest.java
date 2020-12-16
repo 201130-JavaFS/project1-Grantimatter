@@ -6,6 +6,10 @@ import com.revature.ers.service.UpdateReimbursementService;
 import org.apache.log4j.Logger;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+import java.math.MathContext;
+import java.math.RoundingMode;
+
 class UpdateReimbursementServiceImplTest {
     Logger log = Logger.getLogger(UpdateReimbursementServiceImplTest.class);
 
@@ -14,14 +18,19 @@ class UpdateReimbursementServiceImplTest {
 
     @Test
     void testCreateReimbursement() {
-/*
-        Reimbursement reimbursement = new Reimbursement(123.42,0, 2);
-        boolean successful =  updateReimbursementService.createReimbursement(reimbursement);
+
+        Reimbursement reimbursement = new Reimbursement(new BigDecimal(123.42).round(new MathContext(2, RoundingMode.CEILING)),0, 2);
+        boolean successful = false;
+        if(reimbursement.getDescription() != null && reimbursement.getDescription().length() > 0){
+            successful =  updateReimbursementService.createReimbursement(reimbursement);
+        }else{
+            successful = updateReimbursementService.createReimbursementMin(reimbursement);
+        }
 
         if(successful){
             log.info("Create reimbursement successful: " + reimbursement);
         }
-        */
+
 
     }
 

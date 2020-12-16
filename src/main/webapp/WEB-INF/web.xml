@@ -5,6 +5,16 @@
     <welcome-file>pages/home.html</welcome-file>
   </welcome-file-list>
 
+  <filter>
+    <filter-name>Cors</filter-name>
+    <filter-class>com.revature.ers.web.filters.CorsFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>Cors</filter-name>
+    <url-pattern>/*</url-pattern>
+  </filter-mapping>
+
   <!--This defines the servlet for the deployment descriptor.-->
 
   <servlet>
@@ -14,132 +24,11 @@
     <servlet-class>com.revature.ers.servlet.MasterServlet</servlet-class>
   </servlet>
 
-  <!--
-  <servlet>
-    <description></description>
-    <display-name>LoginServlet</display-name>
-    <servlet-name>LoginServlet</servlet-name>
-    <servlet-class>com.revature.ers.servlet.LoginServlet</servlet-class>
-  </servlet>
-
-  <servlet>
-    <description></description>
-    <display-name>SuccessServlet</display-name>
-    <servlet-name>SuccessServlet</servlet-name>
-    <servlet-class>com.revature.ers.servlet.SuccessServlet</servlet-class>
-  </servlet>
-
-  <servlet>
-    <description></description>
-    <display-name>LogoutServlet</display-name>
-    <servlet-name>LogoutServlet</servlet-name>
-    <servlet-class>com.revature.ers.servlet.LogoutServlet</servlet-class>
-  </servlet>
-
-  <servlet>
-    <description></description>
-    <display-name>TestServlet</display-name>
-    <servlet-name>TestServlet</servlet-name>
-    <servlet-class>com.revature.ers.servlet.TestServlet</servlet-class>
-  </servlet>
-
-  <servlet>
-    <description></description>
-    <display-name>SubmitReimbursementServlet</display-name>
-    <servlet-name>SubmitReimbursementServlet</servlet-name>
-    <servlet-class>com.revature.ers.servlet.SubmitReimbursementServlet</servlet-class>
-  </servlet>
-
-  <servlet>
-    <description></description>
-    <display-name>RetrieveReimbursementsServlet</display-name>
-    <servlet-name>RetrieveReimbursementsServlet</servlet-name>
-    <servlet-class>com.revature.ers.servlet.ReceiveReimbursementServlet</servlet-class>
-  </servlet>
-
-  <servlet>
-    <display-name>NavigateManageReimbursements</display-name>
-    <servlet-name>NavigateManageReimbursements</servlet-name>
-    <servlet-class>com.revature.ers.servlet.pages.ReimbursementManagementPage</servlet-class>
-  </servlet>
-
-  <servlet>
-    <description></description>
-    <display-name>HomePage</display-name>
-    <servlet-name>HomePage</servlet-name>
-    <servlet-class>com.revature.ers.servlet.pages.HomePage</servlet-class>
-  </servlet>
-
-  <servlet>
-    <description></description>
-    <display-name>LoginPage</display-name>
-    <servlet-name>LoginPage</servlet-name>
-    <servlet-class>com.revature.ers.servlet.pages.LoginPage</servlet-class>
-  </servlet>
-
-    <servlet>
-      <description></description>
-      <display-name>ReimbursementsPage</display-name>
-      <servlet-name>ReimbursementsPage</servlet-name>
-      <servlet-class>com.revature.ers.servlet.pages.ReimbursementPage</servlet-class>
-    </servlet>
-    -->
-
   <!--This will map the above servlet to a URL location. The URL pattern is added to the base URL of the application-->
 
   <servlet-mapping>
     <servlet-name>MasterServlet</servlet-name>
     <url-pattern>/*</url-pattern>
   </servlet-mapping>
-<!--
-  <servlet-mapping>
-    <servlet-name>LoginServlet</servlet-name>
-    <url-pattern>/submit-login</url-pattern>
-  </servlet-mapping>
 
-  <servlet-mapping>
-    <servlet-name>SuccessServlet</servlet-name>
-    <url-pattern>/success</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>LogoutServlet</servlet-name>
-    <url-pattern>/logout</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>TestServlet</servlet-name>
-    <url-pattern>/test</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>SubmitReimbursementServlet</servlet-name>
-    <url-pattern>/reimb-submit</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>RetrieveReimbursementsServlet</servlet-name>
-    <url-pattern>/reimb-get</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>NavigateManageReimbursements</servlet-name>
-    <url-pattern>/manage</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>HomePage</servlet-name>
-    <url-pattern>/home</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>LoginPage</servlet-name>
-    <url-pattern>/login</url-pattern>
-  </servlet-mapping>
-
-  <servlet-mapping>
-    <servlet-name>ReimbursementsPage</servlet-name>
-    <url-pattern>/reimbursements</url-pattern>
-  </servlet-mapping>
-  -->
 </web-app>

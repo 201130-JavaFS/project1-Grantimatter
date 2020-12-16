@@ -15,20 +15,22 @@ public class PasswordUtil {
 
     public static Password getPasswordFromResultSet(ResultSet resultSet){
         Password password = null;
-        try{
-            password = new Password(
-                    resultSet.getString("user_password_encrypted"),
-                    resultSet.getString("password_salt")
-            );
-        } catch (SQLException e) {
-            log.error(e.getMessage());
+        if(resultSet != null) {
+            try {
+                password = new Password(
+                        resultSet.getString("user_password_encrypted"),
+                        resultSet.getString("password_salt")
+                );
+            } catch (SQLException e) {
+                log.error(e.getMessage());
+            }
         }
         return password;
     }
 
     public static Password getNextPasswordFromResultSet(ResultSet resultSet){
         try {
-            if(resultSet.next()){
+            if(resultSet != null && resultSet.next()){
                 return getPasswordFromResultSet(resultSet);
             }
         } catch (SQLException e) {
@@ -40,7 +42,7 @@ public class PasswordUtil {
     public static List<Password> getPasswordsFromResultSet(ResultSet resultSet){
         List<Password> passwordList = new ArrayList<>();
         try {
-            while (resultSet.next()) {
+            while (resultSet != null && resultSet.next()) {
                 passwordList.add(getPasswordFromResultSet(resultSet));
             }
         } catch (SQLException e) {

@@ -5,12 +5,12 @@ module.exports = {
     mode: 'development',
     entry: {
         navigation: './src/Navigation.js',
-        reimbursements: ['./src/reimbursements/Reimbursement.js', './src/reimbursements/ReimbursementUtil.js'],
-        login: './src/LoginModal.js',
+        reimbursements: ['./src/reimbursements/ReimbursementUtil.js', './src/reimbursements/CreateReimbursement.js' , './src/reimbursements/ReimbursementDisplay.js'],
+        login: ['./src/Login.js', './src/LoginModal.js'],
     },
     plugins: [
         new HtmlWebpackPlugin({
-            title: 'Output Management',
+            title: 'Revature ERS',
         }),
     ],
   output: {

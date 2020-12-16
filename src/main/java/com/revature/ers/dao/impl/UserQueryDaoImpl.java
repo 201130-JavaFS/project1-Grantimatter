@@ -30,7 +30,7 @@ public class UserQueryDaoImpl implements UserQueryDao {
         int id = 0;
         try{
             ResultSet resultSet = Queries.sendQuery(UserQueries.GET_USER_ID_FROM_USERNAME_OR_EMAIL, username_or_email, username_or_email);
-            if(resultSet.next()){
+            if(resultSet != null && resultSet.next()){
                 id = resultSet.getInt("ers_users_id");
             }
         } catch (ErsException | SQLException e) {
