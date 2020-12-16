@@ -1,13 +1,13 @@
 import $ from 'jquery';
 import _ from 'lodash';
 import {getCookie} from './util/Cookies.js';
-import {getUserSession} from './util/User.js';
+import {user} from './util/User.js';
 import './style.css';
 
 class Navbar{
     constructor(brandText, action){
-        this.head = document.createElement("header");
-        this.head.classList.add("navbar",  "navbar-expand", "flex-column", "flex-md-row", "bd-navbar", "navbar-fixed-top", "navbar-expand-lg", "navbar-dark", "bg-dark");
+        this.head = document.createElement("nav");
+        this.head.classList.add("navbar",  "navbar-expand-lg", "navbar-fixed-top", "navbar-dark", "bg-dark");
 
         let brand = document.createElement("a");
         brand.classList.add("navbar-brand");
@@ -79,16 +79,15 @@ class Navbar{
 let nav = new Navbar("Wiswell", ()=>window.open("home.html", "_self"));
 nav.addLeftListItem("Home", ()=>window.open("home.html", "_self"));
 
-function createLoginButton(){
-    let jqxhr = getUserSession();
-    jqxhr.done(function( data, textStatus, jqXHR ) {
-        nav.addRightListItem(_.startCase(_.toLower(data.loggedUser)), ()=>window.open('reimbursements.html', '_self'));
+async function createLoginButton(){
+    let login = await user;
+    if(login){
+        nav.addRightListItem(_.startCase(_.toLower(login.full_name)), ()=>window.open('reimbursements.html', '_self'));
         nav.addLeftListItem('Reimbursements', ()=>window.open('reimbursements.html', '_self'));
-    });
-    jqxhr.fail(()=>{
+    }else{
         nav.addRightListItem('Login', ()=>window.open('login.html', '_self'));
         nav.addLeftListItem('Reimbursments', ()=>window.open('login.html', '_self'));
-    });
+    }
 }
 
 createLoginButton();

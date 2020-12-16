@@ -6,13 +6,15 @@ import com.revature.ers.dao.impl.util.UserUtil;
 import com.revature.ers.dao.queries.UserQueries;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.User;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class UserQueryDaoImpl implements UserQueryDao {
-    Logger log = Logger.getLogger(UserQueryDaoImpl.class);
+    Logger log = LogManager.getLogger(UserQueryDaoImpl.class);
 
     @Override
     public User getUserFromLogin(String username_or_email, String given_password) {

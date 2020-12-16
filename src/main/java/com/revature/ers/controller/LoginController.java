@@ -3,11 +3,14 @@ package com.revature.ers.controller;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.model.User;
 import com.revature.ers.model.dto.LoginDTO;
+import com.revature.ers.model.dto.UserDTO;
 import com.revature.ers.service.UserQueryService;
 import com.revature.ers.service.impl.UserQueryServiceImpl;
 import com.revature.ers.servlet.util.RequestUtil;
 import com.revature.ers.servlet.util.SessionUtil;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -17,7 +20,7 @@ import java.io.IOException;
 
 public class LoginController {
 
-    static Logger log = Logger.getLogger(LoginController.class);
+    static Logger log = LogManager.getLogger(LoginController.class);
     UserQueryService userQueryService = new UserQueryServiceImpl();
     ObjectMapper objectMapper = new ObjectMapper();
 
@@ -49,8 +52,11 @@ public class LoginController {
             if(session != null){
                 User user = SessionUtil.getUserFromSession(req);
                 if(user != null){
-                    String loggedUser = String.format("{\"%s\":\"%s_%s\"}", "loggedUser", user.getFirst_name(), user.getLast_name());
-                    resp.getWriter().write(loggedUser);
+                    UserDTO userDTO = new UserDTO(String.format("%s_%s", user.getFirst_name(), user.getLast_name()), user.getRole_id());
+                    //String loggedUser = String.format("{\"loggedUser\":\"%s_%s\", \"role\":\"%s\"}", user.getFirst_name(), user.getLast_name(), user.getRole_id());
+                    String userJson = objectMapper.writeValueAsString(userDTO);
+                    log.info("userJson: " + userJson);
+                    resp.getWriter().write(userJson);
                     resp.setStatus(200);
                 }
             }else{

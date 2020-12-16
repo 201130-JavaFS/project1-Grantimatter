@@ -41,28 +41,14 @@ hr.solid {
     background-color:  #395739;
 }
 
-/*
-@keyframes activateApprove{
-    from{background-color: #395739};
-    to{background-color: #426442;};
+.reimb-approved{
+    background-color: #395739;
 }
 
-@keyframes deactivateApprove{
-    from {background-color: #426442};
-    to {background-color: #395739;};
-}
-*/
-/*
-.reimb-approved-activate{
-    animation: activateApprove 100ms;
-    animation-fill-mode: forwards;
+.reimb-approved-active{
+    background-color: #426442
 }
 
-.reimb-approved-deactivate{
-    animation: deactivateApprove 250ms;
-    animation-fill-mode: forwards;
-}
-*/
 .reimb-denied{
     background-color: #533d3d;
 }

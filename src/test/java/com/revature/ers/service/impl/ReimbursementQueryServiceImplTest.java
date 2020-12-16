@@ -5,14 +5,15 @@ import com.revature.ers.model.Reimbursement;
 import com.revature.ers.model.User;
 import com.revature.ers.service.ReimbursementQueryService;
 import com.revature.ers.service.UserQueryService;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
 class ReimbursementQueryServiceImplTest {
-    Logger log = Logger.getLogger(ReimbursementQueryServiceImplTest.class);
+    Logger log = LogManager.getLogger(ReimbursementQueryServiceImplTest.class);
 
     UserQueryService userQueryService = new UserQueryServiceImpl();
     ReimbursementQueryService reimbursementQueryService = new ReimbursementQueryServiceImpl();

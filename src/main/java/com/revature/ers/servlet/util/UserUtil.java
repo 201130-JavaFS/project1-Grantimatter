@@ -1,10 +1,11 @@
 package com.revature.ers.servlet.util;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 
 public class UserUtil {
 
-    static Logger log = Logger.getLogger(UserUtil.class);
+    static Logger log = LogManager.getLogger(UserUtil.class);
 
 
 }

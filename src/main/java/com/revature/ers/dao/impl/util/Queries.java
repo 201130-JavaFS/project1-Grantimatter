@@ -2,7 +2,8 @@ package com.revature.ers.dao.impl.util;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.util.jdbutil.PostgresSqlConnection;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -12,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 
 public class Queries {
-    static Logger log = Logger.getLogger(Queries.class);
+    static Logger log = LogManager.getLogger(Queries.class);
 
     public static ResultSet sendQuery(String sql, Object... objects) throws ErsException {
         try (Connection connection = PostgresSqlConnection.getConnection()) {

@@ -6,11 +6,13 @@ import com.revature.ers.dao.impl.util.Queries;
 import com.revature.ers.dao.queries.PasswordQueries;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Password;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PasswordQueryDaoImpl implements PasswordQueryDao {
 
-    Logger log = Logger.getLogger(PasswordQueryDaoImpl.class);
+    Logger log = LogManager.getLogger(PasswordQueryDaoImpl.class);
 
     @Override
     public Password getPasswordFromUserId(int id) throws ErsException {

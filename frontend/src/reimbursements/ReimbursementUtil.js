@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import _ from 'lodash';
 
-let name = 'Grant Wiswell!';
+export {Reimbursement};
 
 class Reimbursement{
     constructor(id, amount, author_id, resolver_id, status_id, type_id, description, submitted, resolved){
@@ -42,4 +42,25 @@ class Reimbursement{
     }
 }
 
-export {Reimbursement};
+$('.reimb-approved').on({
+    mouseenter: ()=>{
+        console.log('Mouse Entered Approved row!');
+        $(this).addClass('reimb-approved-active');
+    },
+    mouseleave: ()=>{$(this).removeClass('reimb-approved-active')}
+});
+
+$('.reimb-approved').on('mouseenter mouseleave', ()=>{
+    console.log('Mouse entered or mouse left!');
+    $(this).toggleClass('reimb-approved-active');
+});
+
+$('.reimb-denied').on('mouseenter mouseleave', ()=>{
+    console.log('Mouse entered or mouse left!');
+    $(this).toggleClass('reimb-denied-active');
+});
+
+$('.reimb-pending').on('mouseenter mouseleave', ()=>{
+    console.log('Mouse entered or mouse left!');
+    $(this).toggleClass('row-hover-active');
+});

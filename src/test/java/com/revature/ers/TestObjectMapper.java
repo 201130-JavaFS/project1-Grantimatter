@@ -4,14 +4,15 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.model.Reimbursement;
 import com.revature.ers.model.User;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
 public class TestObjectMapper {
 
-    Logger log = Logger.getLogger(TestObjectMapper.class);
+    Logger log = LogManager.getLogger(TestObjectMapper.class);
 
     @Test
     void testMapper(){

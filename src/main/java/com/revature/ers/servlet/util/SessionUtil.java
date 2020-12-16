@@ -2,14 +2,15 @@ package com.revature.ers.servlet.util;
 
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.User;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 public class SessionUtil {
 
-    static Logger log = Logger.getLogger(SessionUtil.class);
+    static Logger log = LogManager.getLogger(SessionUtil.class);
 
     public static boolean setupLoginSession(HttpServletRequest req, User user){
         HttpSession session = req.getSession();

@@ -5,10 +5,12 @@ import com.revature.ers.dao.impl.util.Queries;
 import com.revature.ers.dao.queries.ReimbursementQueries;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Reimbursement;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class UpdateReimbursementDaoImpl implements UpdateReimbursementDao {
-    Logger log = Logger.getLogger(UpdateReimbursementDaoImpl.class);
+    Logger log = LogManager.getLogger(UpdateReimbursementDaoImpl.class);
 
     @Override
     public boolean createReimbursementMin(Reimbursement reimbursement) throws ErsException {

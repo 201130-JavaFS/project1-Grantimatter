@@ -1,7 +1,8 @@
 package com.revature.ers.dao.impl.util;
 
 import com.revature.ers.model.User;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -9,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserUtil {
-    static Logger log = Logger.getLogger(UserUtil.class);
+    static Logger log = LogManager.getLogger(UserUtil.class);
 
     public static User getUserFromResultSet(ResultSet resultSet){
         User user = null;

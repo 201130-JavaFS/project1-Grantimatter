@@ -10,7 +10,9 @@ import com.revature.ers.service.impl.ReimbursementQueryServiceImpl;
 import com.revature.ers.service.impl.UpdateReimbursementServiceImpl;
 import com.revature.ers.servlet.util.RequestUtil;
 import com.revature.ers.servlet.util.SessionUtil;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +21,7 @@ import java.util.List;
 
 public class ReimbursementController {
 
-    static Logger log = Logger.getLogger(ReimbursementController.class);
+    static Logger log = LogManager.getLogger(ReimbursementController.class);
     ReimbursementQueryService reimbursementQueryService = new ReimbursementQueryServiceImpl();
     UpdateReimbursementService updateReimbursementService = new UpdateReimbursementServiceImpl();
     ObjectMapper objectMapper = new ObjectMapper();

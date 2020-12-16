@@ -12,4 +12,8 @@ function getUserSession(){
     });
 }
 
-export {getUserSession};
+let user = getUserSession().done((data, textStatus, jqXHR)=>{
+    return data;
+});
+
+export {getUserSession, user};

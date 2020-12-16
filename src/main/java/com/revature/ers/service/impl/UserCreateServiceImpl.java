@@ -6,7 +6,8 @@ import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.User;
 import com.revature.ers.service.UserCreateService;
 import com.revature.ers.service.impl.util.ReadRequest;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,7 +16,7 @@ import java.io.IOException;
 
 public class UserCreateServiceImpl implements UserCreateService {
 
-    Logger log = Logger.getLogger(UserCreateServiceImpl.class);
+    Logger log = LogManager.getLogger(UserCreateServiceImpl.class);
 
     ObjectMapper objectMapper = new ObjectMapper();
 

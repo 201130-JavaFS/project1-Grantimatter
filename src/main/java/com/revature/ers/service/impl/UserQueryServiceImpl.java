@@ -8,11 +8,12 @@ import com.revature.ers.model.User;
 import com.revature.ers.service.impl.util.Encryption;
 import com.revature.ers.service.PasswordQueryService;
 import com.revature.ers.service.UserQueryService;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 
 public class UserQueryServiceImpl implements UserQueryService {
 
-    Logger log = Logger.getLogger(UserQueryServiceImpl.class);
+    Logger log = LogManager.getLogger(UserQueryServiceImpl.class);
     UserQueryDao userQueryDao = new UserQueryDaoImpl();
     PasswordQueryService passwordQueryService = new PasswordQueryServiceImpl();
 

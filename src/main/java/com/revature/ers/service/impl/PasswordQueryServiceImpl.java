@@ -5,11 +5,12 @@ import com.revature.ers.dao.impl.PasswordQueryDaoImpl;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Password;
 import com.revature.ers.service.PasswordQueryService;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 
 public class PasswordQueryServiceImpl implements PasswordQueryService {
 
-    Logger log = Logger.getLogger(PasswordQueryServiceImpl.class);
+    Logger log = LogManager.getLogger(PasswordQueryServiceImpl.class);
     PasswordQueryDao passwordQueryDao = new PasswordQueryDaoImpl();
 
     @Override

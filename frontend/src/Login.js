@@ -26,7 +26,7 @@ async function login(e){
         let loggedUser = _.startCase(_.toLower(data.loggedUser));
         if(loggedUser){
             console.log('Login Successful!');
-            createCookie('loggedUser', loggedUser);
+            //createCookie('loggedUser', loggedUser);
             window.open('reimbursements.html', '_self');
         }
     });

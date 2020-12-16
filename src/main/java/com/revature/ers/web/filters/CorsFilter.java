@@ -1,6 +1,7 @@
 package com.revature.ers.web.filters;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -11,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class CorsFilter implements Filter {
-    static Logger log = Logger.getLogger(CorsFilter.class);
+    static Logger log = LogManager.getLogger(CorsFilter.class);
     /*
      * The idea of a Filter, is that before the request is delegated to a Servlet,
      * it must first pass through any and all filters

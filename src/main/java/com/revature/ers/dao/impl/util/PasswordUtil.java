@@ -2,7 +2,8 @@ package com.revature.ers.dao.impl.util;
 
 import com.revature.ers.model.Password;
 import com.revature.ers.model.User;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -11,7 +12,7 @@ import java.util.List;
 
 public class PasswordUtil {
 
-    static Logger log = Logger.getLogger(PasswordUtil.class);
+    static Logger log = LogManager.getLogger(PasswordUtil.class);
 
     public static Password getPasswordFromResultSet(ResultSet resultSet){
         Password password = null;

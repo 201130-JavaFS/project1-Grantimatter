@@ -9,13 +9,14 @@ import com.revature.ers.service.UpdateReimbursementService;
 import com.revature.ers.service.impl.util.ReadRequest;
 import com.revature.ers.servlet.util.SessionUtil;
 import com.revature.ers.servlet.util.UserUtil;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 public class UpdateReimbursementServiceImpl implements UpdateReimbursementService {
-    Logger log = Logger.getLogger(UpdateReimbursementServiceImpl.class);
+    Logger log = LogManager.getLogger(UpdateReimbursementServiceImpl.class);
     UpdateReimbursementDao updateReimbursementDao = new UpdateReimbursementDaoImpl();
     ObjectMapper objectMapper = new ObjectMapper();
 

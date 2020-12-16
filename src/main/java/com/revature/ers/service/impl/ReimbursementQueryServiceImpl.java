@@ -5,13 +5,14 @@ import com.revature.ers.dao.impl.ReimbursementQueryDaoImpl;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Reimbursement;
 import com.revature.ers.service.ReimbursementQueryService;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReimbursementQueryServiceImpl implements ReimbursementQueryService {
-    Logger log = Logger.getLogger(ReimbursementQueryServiceImpl.class);
+    Logger log = LogManager.getLogger(ReimbursementQueryServiceImpl.class);
     ReimbursementQueryDao reimbursementQueryDao = new ReimbursementQueryDaoImpl();
 
     @Override

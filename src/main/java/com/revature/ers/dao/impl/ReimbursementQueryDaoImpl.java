@@ -7,14 +7,16 @@ import com.revature.ers.dao.queries.ReimbursementQueries;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Reimbursement;
 import com.revature.ers.util.sorting.SubmittedComparator;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class ReimbursementQueryDaoImpl implements ReimbursementQueryDao {
-    Logger log = Logger.getLogger(ReimbursementQueryDaoImpl.class);
+    Logger log = LogManager.getLogger(ReimbursementQueryDaoImpl.class);
 
     @Override
     public Reimbursement getReimbursementFromId(int reimb_id) throws ErsException {

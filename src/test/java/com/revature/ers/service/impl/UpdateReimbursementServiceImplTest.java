@@ -3,7 +3,8 @@ package com.revature.ers.service.impl;
 import com.revature.ers.model.Reimbursement;
 import com.revature.ers.service.ReimbursementQueryService;
 import com.revature.ers.service.UpdateReimbursementService;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
@@ -11,7 +12,7 @@ import java.math.MathContext;
 import java.math.RoundingMode;
 
 class UpdateReimbursementServiceImplTest {
-    Logger log = Logger.getLogger(UpdateReimbursementServiceImplTest.class);
+    Logger log = LogManager.getLogger(UpdateReimbursementServiceImplTest.class);
 
     ReimbursementQueryService reimbursementQueryService = new ReimbursementQueryServiceImpl();
     UpdateReimbursementService updateReimbursementService = new UpdateReimbursementServiceImpl();

@@ -1,12 +1,13 @@
 package com.revature.ers.service;
 
 import com.revature.ers.service.impl.util.Encryption;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;;
 import org.junit.jupiter.api.Test;
 
 class EncryptionTest {
 
-    Logger log = Logger.getLogger(EncryptionTest.class);
+    Logger log = LogManager.getLogger(EncryptionTest.class);
 
     @Test
     void TestEncryption(){
