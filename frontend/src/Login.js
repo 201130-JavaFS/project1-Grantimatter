@@ -1,9 +1,8 @@
 import $ from 'jquery';
 import _ from 'lodash';
-import {postData, getData, baseUrl} from './fetch/FetchUtil.js';
-import {createCookie} from './util/Cookies.js';
+import {baseUrl} from './fetch/FetchUtil.js';
 
-async function login(e){
+function login(e){
     e.preventDefault();
     const username = $('#username').val();
     const password = $('#password').val();
@@ -29,6 +28,17 @@ async function login(e){
             //createCookie('loggedUser', loggedUser);
             window.open('reimbursements.html', '_self');
         }
+    });
+}
+
+export function logout(){
+    $.ajax({
+        url: baseUrl + 'logout',
+        xhrFields: {withCredentials: true},
+        method: 'GET',
+        dataType: 'json'
+    }).always(()=>{
+        window.open('home.html', '_self');
     });
 }
 

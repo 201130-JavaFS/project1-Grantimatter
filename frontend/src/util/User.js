@@ -1,5 +1,4 @@
-import $, { data } from 'jquery';
-import _ from 'lodash';
+import $ from 'jquery';
 import {baseUrl} from '../fetch/FetchUtil.js';
 
 function getUserSession(){

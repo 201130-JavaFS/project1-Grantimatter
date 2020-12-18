@@ -1,8 +1,7 @@
 import $ from 'jquery';
-import _, { create } from 'lodash';
-import {postData, getData, baseUrl} from '../fetch/FetchUtil.js';
+import {baseUrl} from '../fetch/FetchUtil.js';
 import {Reimbursement} from '../reimbursements/ReimbursementUtil.js';
-import { user } from '../util/User.js';
+import {user} from '../util/User.js';
 
 $.ajax({
     url: baseUrl + 'reimbursements',
