@@ -104,6 +104,7 @@ public class ReimbursementController {
 
     public void getReimbursementFromId(HttpServletRequest req, HttpServletResponse resp){
         User user = SessionUtil.getUserFromSession(req);
+        log.info("Getting reimbursement with loggedin user: " + user);
         if(user != null){
             try {
                 String requestBody = RequestUtil.ReadRequestBody(req);
