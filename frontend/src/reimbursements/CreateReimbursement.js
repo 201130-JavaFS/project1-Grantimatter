@@ -16,12 +16,12 @@ function submitReimbursement(e){
         dataType: 'json',
         data: JSON.stringify({amount, type_id, description})
     }).done(()=>{
-        //alert('You\'re reimbursement request has been submitted!');
+        
     }).fail(()=>{
         //alert('Something went wrong, please try again later.');
     }).always(()=>{
         $('#new_reimb_form').get(0).reset();
-        location.reload();
+        window.$('#new_reimb_modal').modal('toggle');
     });
 }
 

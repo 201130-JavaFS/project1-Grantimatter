@@ -96,10 +96,7 @@ async function createLoginButton(){
         method: 'GET',
         dataType: 'json',
     }).done((data, textStatus, jqXHR)=>{
-
         createProfileDropdown(data.full_name);
-
-        //nav.addRightListItem(_.startCase(_.toLower(data.full_name)), ()=>window.open('reimbursements.html', '_self'));
         nav.addLeftListItem('Reimbursements', ()=>window.open('reimbursements.html', '_self'));
     }).fail(()=>{
         nav.addRightListItem('Login', ()=>window.open('login.html', '_self'));

@@ -1,7 +1,15 @@
 import $ from 'jquery';
 import {baseUrl} from '../fetch/FetchUtil.js';
 
-function getUserSession(){
+class User{
+    constructor(full_name, role_id, user_id){
+        this.full_name = full_name;
+        this.role_id = role_id;
+        this.user_id = user_id;
+    }
+}
+
+function userXhr(){
     return $.ajax({
         url: baseUrl + 'login',
         xhrFields: {withCredentials: true},
@@ -11,8 +19,6 @@ function getUserSession(){
     });
 }
 
-let user = getUserSession().done((data, textStatus, jqXHR)=>{
-    return data;
-});
+let user = userXhr();
 
-export {getUserSession, user};
+export {User, user};
