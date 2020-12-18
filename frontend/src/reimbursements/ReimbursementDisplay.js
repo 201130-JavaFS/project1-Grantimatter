@@ -52,11 +52,7 @@ function getOtherReimbursements() {
         for(const reimbursement of data){
             addOtherReimbursement(reimbursement, 'other_reimb_table_body');
         }
-
-        if($('#other_reimb_table_body').children.length > 0){
-            $('#other_reimb_table').show();
-        }
-
+        
         $('#other-reimb-tab').show();
     }).fail(()=>{
         console.log('Failed to find any reimbursements');
