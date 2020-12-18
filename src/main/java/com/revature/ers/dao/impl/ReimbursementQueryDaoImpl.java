@@ -34,8 +34,6 @@ public class ReimbursementQueryDaoImpl implements ReimbursementQueryDao {
         List<Reimbursement> reimbursementList = new ArrayList<>();
         try{
             reimbursementList = ReimbursementUtil.getReimbursementsFromResultSet(Queries.sendQuery(ReimbursementQueries.GET_REIMBURSEMENT_FROM_AUTHOR_ID, author_id));
-            SubmittedComparator submittedComparator = new SubmittedComparator();
-            Collections.sort(reimbursementList, submittedComparator);
         } catch (ErsException e) {
             log.error(e.getMessage(), e);
         }

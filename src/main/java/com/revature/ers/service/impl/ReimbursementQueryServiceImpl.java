@@ -5,10 +5,12 @@ import com.revature.ers.dao.impl.ReimbursementQueryDaoImpl;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Reimbursement;
 import com.revature.ers.service.ReimbursementQueryService;
+import com.revature.ers.util.sorting.SubmittedComparator;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ReimbursementQueryServiceImpl implements ReimbursementQueryService {
@@ -53,6 +55,8 @@ public class ReimbursementQueryServiceImpl implements ReimbursementQueryService 
         List<Reimbursement> reimbursementList = new ArrayList<>();
         try{
             reimbursementList = reimbursementQueryDao.getAllReimbursements();
+            SubmittedComparator submittedComparator = new SubmittedComparator();
+            Collections.sort(reimbursementList, submittedComparator);
         } catch (ErsException e) {
             log.warn(e.getMessage(), e);
         }
