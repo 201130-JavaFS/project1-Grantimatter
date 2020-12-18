@@ -25,9 +25,9 @@ public class MasterServlet extends HttpServlet {
         resp.setStatus(404);
 
         final String URI = req.getRequestURI().replace("/project-1/","").toLowerCase();
-        log.info("URI: {0}", URI);
+        String[] commands = URI.split("/");
 
-        switch(URI){
+        switch(commands[0]){
             case "reimbursements":
                 reimbursementController.reimbursements(req, resp);
                 break;

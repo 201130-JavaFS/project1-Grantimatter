@@ -35,9 +35,11 @@ public class ReimbursementController {
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp){
-        String URI = req.getRequestURI().replace("reimbursements", "").toLowerCase();
+        String URI = req.getRequestURI().replace("/project-1/", "").replace("reimbursements/", "").toLowerCase();
+        String[] commands = URI.split("/");
+        log.info("Reimbursements URI: " + URI);
         try{
-            switch (URI) {
+            switch (commands[0]) {
                 case "all":
                     getAllReimbursements(req, resp);
                     break;
@@ -88,7 +90,7 @@ public class ReimbursementController {
     public void getAllReimbursements(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         User user = SessionUtil.getUserFromSession(req);
         log.info("Attempting to grab all reimbursements");
-        if(user != null && user.getRole_id() == 0){
+        if(user != null && user.getRole_id() == 1){
             List<Reimbursement> reimbursementList = reimbursementQueryService.getAllReimbursements();
             String json = objectMapper.writeValueAsString(reimbursementList);
 
@@ -111,7 +113,7 @@ public class ReimbursementController {
                 ObjectMapper objectMapper = new ObjectMapper();
                 JsonNode parent = objectMapper.readTree(requestBody);
                 int requestedUserId = parent.path("requestedUserId").asInt();
-                if(user.getId() == requestedUserId || user.getRole_id() == 0){
+                if(user.getId() == requestedUserId || user.getRole_id() == 1){
                     String json = objectMapper.writeValueAsString(reimbursementQueryService.getReimbursementsFromAuthor(requestedUserId));
                     log.info(String.format("Reimbursements from User with ID #%d\n%s", requestedUserId, json));
                     resp.getWriter().write(json);
