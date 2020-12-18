@@ -72,7 +72,7 @@ public class ReimbursementController {
                 }
 
                 if(created){
-                    resp.getWriter().write("Reimbursement created!");
+                    log.info(String.format("New Reimbursement Created: %s", reimbursement));
                     resp.setStatus(201);
                 }else{
                     resp.setStatus(200);

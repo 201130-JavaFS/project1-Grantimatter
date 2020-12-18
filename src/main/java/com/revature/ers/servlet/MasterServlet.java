@@ -14,10 +14,10 @@ import java.io.IOException;
 
 public class MasterServlet extends HttpServlet {
 
-    private ReimbursementController reimbursementController = new ReimbursementController();
-    private LoginController loginController = new LoginController();
+    static ReimbursementController reimbursementController = new ReimbursementController();
+    static LoginController loginController = new LoginController();
 
-    Logger log = LogManager.getLogger(MasterServlet.class);
+    static Logger log = LogManager.getLogger(MasterServlet.class);
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,7 +25,7 @@ public class MasterServlet extends HttpServlet {
         resp.setStatus(404);
 
         final String URI = req.getRequestURI().replace("/project-1/","").toLowerCase();
-        log.info("URI: " + URI);
+        log.info("URI: {0}", URI);
 
         switch(URI){
             case "reimbursements":
@@ -36,6 +36,9 @@ public class MasterServlet extends HttpServlet {
                 break;
             case "logout":
                 loginController.logout(req, resp);
+                break;
+            default:
+
                 break;
         }
     }

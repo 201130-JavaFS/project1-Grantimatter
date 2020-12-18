@@ -7,8 +7,10 @@ import com.revature.ers.dao.queries.PasswordQueries;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Password;
 
+import com.revature.ers.util.HibernateUtil;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
 
 public class PasswordQueryDaoImpl implements PasswordQueryDao {
 

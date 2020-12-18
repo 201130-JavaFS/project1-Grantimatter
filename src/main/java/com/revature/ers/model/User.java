@@ -1,8 +1,10 @@
 package com.revature.ers.model;
 
+import javax.persistence.Entity;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
 public class User {
 
     private int id;

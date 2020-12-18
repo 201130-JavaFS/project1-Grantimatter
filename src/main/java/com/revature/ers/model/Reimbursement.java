@@ -2,13 +2,17 @@ package com.revature.ers.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
 import java.util.Objects;
 
+@Entity
 public class Reimbursement {
 
+    @Id
     int id;
     BigDecimal amount;
     int author_id;

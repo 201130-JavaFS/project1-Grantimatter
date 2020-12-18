@@ -1,11 +1,21 @@
 package com.revature.ers.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 import java.util.Objects;
 
+@Entity
 public class Password {
+
+    @Id
     int userId;
     private String encrypted;
     private String salt;
+
+    public Password(){
+
+    }
 
     public Password(String encrypted, String salt) {
         this.encrypted = encrypted;
