@@ -1,18 +1,34 @@
 package com.revature.ers.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToMany;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(nullable = false)
     private int role_id;
+    @Column(nullable = false)
     private String username;
+    @Column(nullable = false)
     private String first_name;
+    @Column(nullable = false)
     private String last_name;
+    @Column(nullable = false)
     private String email;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "author_id")
     private List<Reimbursement> reimbursementList;
 
     public User(){ }

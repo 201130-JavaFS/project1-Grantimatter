@@ -1,8 +1,9 @@
 package com.revature.ers.model;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -13,11 +14,16 @@ import java.util.Objects;
 public class Reimbursement {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     int id;
+    @Column(nullable = false)
     BigDecimal amount;
+    @Column(nullable = false)
     int author_id;
     int resolver_id;
+    @Column(nullable = false)
     int status_id;
+    @Column(nullable = false)
     int type_id;
     String description;
     Date submitted;

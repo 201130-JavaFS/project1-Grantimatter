@@ -1,14 +1,22 @@
 package com.revature.ers.model;
 
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
 import javax.persistence.Entity;
+import javax.persistence.ForeignKey;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
+import javax.persistence.OneToOne;
+import javax.persistence.UniqueConstraint;
 import java.util.Objects;
 
 @Entity
 public class Password {
 
-    @Id
+
+    @OneToOne()
     int userId;
     private String encrypted;
     private String salt;
