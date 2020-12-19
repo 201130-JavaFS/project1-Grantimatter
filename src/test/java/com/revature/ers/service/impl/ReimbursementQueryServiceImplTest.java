@@ -32,6 +32,7 @@ class ReimbursementQueryServiceImplTest {
         //assert(reimbursementList.size() > 0);
 
         for (Reimbursement r:reimbursementList) {
+            assert(r != null);
             log.info(r);
         }
 
@@ -50,7 +51,7 @@ class ReimbursementQueryServiceImplTest {
         List<Reimbursement> reimbursementList = reimbursementQueryService.getAllReimbursements();
         //assert(reimbursementList.size() > 0);
         for(Reimbursement r:reimbursementList){
-            log.info(String.format("ALL REIMBURSEMENTS: %S", reimbursementList));
+            log.info(String.format("ALL REIMBURSEMENTS: %S", r));
         }
     }
 }
