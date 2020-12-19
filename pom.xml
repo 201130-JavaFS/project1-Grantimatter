@@ -65,4 +65,8 @@
     </dependency>
 
   </dependencies>
+
+  <build>
+    <finalName>Project-1-ERS</finalName>
+  </build>
 </project>
