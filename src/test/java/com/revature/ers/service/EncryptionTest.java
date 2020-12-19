@@ -5,12 +5,12 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;;
 import org.junit.jupiter.api.Test;
 
-class EncryptionTest {
+public class EncryptionTest {
 
     Logger log = LogManager.getLogger(EncryptionTest.class);
 
     @Test
-    void TestEncryption(){
+    public void TestEncryption(){
         String salt = Encryption.getSalt(30);
         String givenSalt = "9x1tUlIoOkKJzyVxjin9XiBhTjYb8B";
         String rawPassword = "password";

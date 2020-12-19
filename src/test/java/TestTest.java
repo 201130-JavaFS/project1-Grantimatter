@@ -11,5 +11,6 @@ public class TestTest {
     @Test
     public void runThis(){
         log.info("I'm working!");
+        assert(true);
     }
 }
