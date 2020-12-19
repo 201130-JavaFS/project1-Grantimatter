@@ -21,6 +21,7 @@ public class MasterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        log.info(String.format("Someone's trying to get here! %s", req.getRemoteAddr()));
         resp.getWriter().print("<h1>You're getting something!</h1>");
         resp.setContentType("application/json");
         resp.setStatus(404);
