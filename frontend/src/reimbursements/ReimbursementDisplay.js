@@ -5,7 +5,8 @@ import { User, user } from '../util/User.js'
 
 user.done((data, textStatus, jqXHR) => {
     //console.log("User again: " + data.full_name);
-    let currentUser = new User(data.full_name, data.id, data.role_id);
+    let currentUser = new User(data.full_name, data.role_id, data.id);
+    console.log('Created new user!' + JSON.stringify(currentUser));
 
     getMyReimbursements(currentUser.user_id);
 
@@ -22,20 +23,22 @@ function updateReimbursements(){
     
 }
 
-function getMyReimbursements(user_id){
+function getMyReimbursements(requestedUserId){
     $.ajax({
-        url: baseUrl + 'reimbursements',
+        url: baseUrl + 'reimbursements/' + requestedUserId,
         xhrFields: { withCredentials: true },
         context: document.body,
         method: 'GET',
         dataType: 'json'
-        //data: JSON.stringify({user_id})
     }).done(function (data, textStatus, jqXHR) {
         for (const reimbursement of data) {
             addMyReimbursement(reimbursement, 'reimb_table_body');
-        }
+        } 
+
+        $('#my-reimbursements').show();
+
         if($('#reimb_table_body').children().length > 0){
-            $('#my-reimbursements').show();
+            $('#reimb_table').show();
         }
     });
 }
@@ -52,7 +55,7 @@ function getOtherReimbursements() {
         for(const reimbursement of data){
             addOtherReimbursement(reimbursement, 'other_reimb_table_body');
         }
-        
+
         $('#other-reimb-tab').show();
     }).fail(()=>{
         console.log('Failed to find any reimbursements');
@@ -61,40 +64,42 @@ function getOtherReimbursements() {
 }
 
 function addMyReimbursement(reimbursement, table_body_id) {
-    let date = null;
+    let resolved = null;
     console.log("Adding my reimbursement: " + reimbursement);
     if(reimbursement.resolved != null){
-        date = new Date(reimbursement.resolved).toUTCString;
+        resolved = new Date(reimbursement.resolved).toUTCString;
     }
     $('#'+table_body_id).append(
         $('<tr></tr>')
             .addClass(getStatusClass(reimbursement.status_id))
             .append(createData(reimbursement.id))
-            .append(createData('$' + reimbursement.amount))
+            .append(createData('$' + Number(reimbursement.amount).toFixed(2)))
             .append(createData(Reimbursement.getStatus(reimbursement.status_id)))
             .append(createData(Reimbursement.getType(reimbursement.type_id)))
             .append(createData(reimbursement.description))
             .append(createData(new Date(reimbursement.submitted).toUTCString()))
-            .append(createData(date))
+            .append(createData(resolved))
+            .append(createData(reimbursement.resolver_id > -1 ? reimbursement.resolver_id : null))
     );
 }
 
 function addOtherReimbursement(reimbursement, table_body_id) {
-    let date = null;
+    let resolved = null;
     if(reimbursement.resolved != null){
-        date = new Date(reimbursement.resolved).toUTCString;
+        resolved = new Date(reimbursement.resolved).toUTCString;
     }
     $('#'+table_body_id).append(
         $('<tr></tr>')
             .addClass(getStatusClass(reimbursement.status_id))
             .append(createData(reimbursement.id))
             .append(createData(reimbursement.author_id))
-            .append(createData('$' + reimbursement.amount))
+            .append(createData('$' + Number(reimbursement.amount).toFixed(2)))
             .append(createData(Reimbursement.getStatus(reimbursement.status_id)))
             .append(createData(Reimbursement.getType(reimbursement.type_id)))
             .append(createData(reimbursement.description))
             .append(createData(new Date(reimbursement.submitted).toUTCString()))
-            .append(createData(date))
+            .append(createData(resolved))
+            .append(createData(reimbursement.resolver_id))
     );
 }
 

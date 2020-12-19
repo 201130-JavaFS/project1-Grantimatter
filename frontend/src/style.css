@@ -27,7 +27,7 @@ body{
     padding: 16px 0px 16px 0px;
 }
 
-#reimb_table{
+.table-border{
     border: 2px rgb(65,65,65) solid;
     border-radius: 1px;
 }

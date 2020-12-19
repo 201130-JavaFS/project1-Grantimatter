@@ -21,11 +21,11 @@ function submitReimbursement(e){
         //alert('Something went wrong, please try again later.');
     }).always(()=>{
         $('#new_reimb_form').get(0).reset();
-        window.$('#new_reimb_modal').modal('toggle');
+        window.$('#new_reimb_modal').modal('hide');
+        location.reload();
     });
 }
 
 $('#new_reimb_form').on('submit', (e)=>{
     submitReimbursement(e);
-}
-);
+});
