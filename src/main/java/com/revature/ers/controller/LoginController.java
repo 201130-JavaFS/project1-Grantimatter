@@ -41,8 +41,8 @@ public class LoginController {
                 String name = String.format("%s_%s", user.getFirst_name(), user.getLast_name()).trim();
 
                 log.info(loggedIn);
-                resp.getWriter().write(loggedIn);
                 resp.setStatus(200);
+                resp.getWriter().write(loggedIn);
             } else {
                 resp.setStatus(401);
             }
@@ -53,7 +53,6 @@ public class LoginController {
                 User user = SessionUtil.getUserFromSession(req);
                 if(user != null){
                     UserDTO userDTO = new UserDTO(String.format("%s_%s", user.getFirst_name(), user.getLast_name()), user.getRole_id(), user.getId());
-                    //String loggedUser = String.format("{\"loggedUser\":\"%s_%s\", \"role\":\"%s\"}", user.getFirst_name(), user.getLast_name(), user.getRole_id());
                     String userJson = objectMapper.writeValueAsString(userDTO);
                     log.info("userJson: " + userJson);
                     resp.getWriter().write(userJson);

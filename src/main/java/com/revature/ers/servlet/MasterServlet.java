@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class MasterServlet extends HttpServlet {
 
@@ -22,26 +25,33 @@ public class MasterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         log.info(String.format("Someone's trying to get here! %s", req.getRemoteAddr()));
-        resp.getWriter().print("<h1>You're getting something!</h1>");
         resp.setContentType("application/json");
         resp.setStatus(404);
 
-        final String URI = req.getRequestURI().replace("/project-1/","").toLowerCase();
-        String[] commands = URI.split("/");
+        final String URI = req.getRequestURI();
+        List<String> commandList = new ArrayList<>(Arrays.asList(URI.split("/")));
+        commandList.removeAll(Arrays.asList("", null));
+        commandList.remove(0);
+        //String[] commands = URI.split("/");
+        for(String c:commandList){
+            log.info("Command List: " + c);
+        }
 
-        switch(commands[0]){
-            case "reimbursements":
-                reimbursementController.reimbursements(req, resp);
-                break;
-            case "login":
-                loginController.login(req, resp);
-                break;
-            case "logout":
-                loginController.logout(req, resp);
-                break;
-            default:
+        if(commandList.size() > 0){
+            switch(commandList.get(0)){
+                case "reimbursements":
+                    reimbursementController.reimbursements(req, resp);
+                    break;
+                case "login":
+                    loginController.login(req, resp);
+                    break;
+                case "logout":
+                    loginController.logout(req, resp);
+                    break;
+                default:
 
-                break;
+                    break;
+            }
         }
     }
 

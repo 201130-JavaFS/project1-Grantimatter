@@ -17,6 +17,8 @@ import org.apache.logging.log4j.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class ReimbursementController {
@@ -35,29 +37,35 @@ public class ReimbursementController {
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp){
-        String URI = req.getRequestURI().replace("/project-1/", "").replace("reimbursements/", "").toLowerCase();
-        String[] commands = URI.split("/");
-        log.info("Reimbursements URI: " + URI);
-        try{
-            switch (commands[0]) {
-                case "all":
-                    getAllReimbursements(req, resp);
-                    break;
-                default:
-                    if(commands.length > 0){
-                        try{
-                            int id = Integer.parseInt(commands[0]);
-                            if(id > -1){
-                                getReimbursementFromId(req, resp, id);
+        String URI = req.getRequestURI();
+        //String[] commands = URI.split("/");
+        List<String> commandList = new ArrayList<>(Arrays.asList(URI.split("/")));
+        commandList.removeAll(Arrays.asList("", null));
+        commandList.remove(0);
+        commandList.remove(0);
+        log.info("Reimbursements URI: " + commandList);
+        if(commandList.size() > 0){
+            try{
+                switch (commandList.get(0)) {
+                    case "all":
+                        getAllReimbursements(req, resp);
+                        break;
+                    default:
+                        if(commandList.size() > 0){
+                            try{
+                                int id = Integer.parseInt(commandList.get(0));
+                                if(id > -1){
+                                    getReimbursementFromId(req, resp, id);
+                                }
+                            } catch (NumberFormatException e) {
+                                log.error(e.getMessage(), e);
                             }
-                        } catch (NumberFormatException e) {
-                            log.error(e.getMessage(), e);
                         }
-                    }
-                    break;
+                        break;
+                }
+            } catch (IOException e) {
+                log.warn(e.getMessage(), e);
             }
-        } catch (IOException e) {
-            log.warn(e.getMessage(), e);
         }
     }
 
