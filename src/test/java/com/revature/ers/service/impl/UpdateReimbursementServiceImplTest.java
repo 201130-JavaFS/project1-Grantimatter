@@ -17,6 +17,7 @@ class UpdateReimbursementServiceImplTest {
     ReimbursementQueryService reimbursementQueryService = new ReimbursementQueryServiceImpl();
     UpdateReimbursementService updateReimbursementService = new UpdateReimbursementServiceImpl();
 
+    /*
     @Test
     void testCreateReimbursement() {
 
@@ -45,5 +46,5 @@ class UpdateReimbursementServiceImplTest {
     void testDenyReimbursement(){
         Reimbursement newReimbursement = reimbursementQueryService.getReimbursementFromId(11);
         //log.info(String.format("Deny Reimbursement Successful? %s", updateReimbursementService.denyReimbursement(newReimbursement) ? "Yes!" : "No!"));
-    }
+    }*/
 }

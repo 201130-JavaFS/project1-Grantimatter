@@ -44,7 +44,16 @@ public class ReimbursementController {
                     getAllReimbursements(req, resp);
                     break;
                 default:
-                    getReimbursementFromId(req, resp);
+                    if(commands.length > 0){
+                        try{
+                            int id = Integer.parseInt(commands[0]);
+                            if(id > -1){
+                                getReimbursementFromId(req, resp, id);
+                            }
+                        } catch (NumberFormatException e) {
+                            log.error(e.getMessage(), e);
+                        }
+                    }
                     break;
             }
         } catch (IOException e) {
@@ -64,8 +73,10 @@ public class ReimbursementController {
         log.info("Creating new Reimbursement!");
         User user = SessionUtil.getUserFromSession(req);
         Reimbursement reimbursement = new ObjectMapper().readValue(RequestUtil.ReadRequestBody(req), Reimbursement.class);
+        reimbursement.setAuthor_id(user.getId());
+        log.info(String.format("New Reimbursement: %s", reimbursement));
         if(user != null && reimbursement != null){
-            if(reimbursement.getAuthor_id() == user.getId() || user.getRole_id() == 0){
+            if(reimbursement.getAuthor_id() == user.getId() || user.getRole_id() == 1){
                 boolean created = false;
                 if(reimbursement.getDescription() != null && reimbursement.getDescription().length() > 0){
                     created = updateReimbursementService.createReimbursement(reimbursement);
@@ -92,10 +103,14 @@ public class ReimbursementController {
         log.info("Attempting to grab all reimbursements");
         if(user != null && user.getRole_id() == 1){
             List<Reimbursement> reimbursementList = reimbursementQueryService.getAllReimbursements();
-            String json = objectMapper.writeValueAsString(reimbursementList);
 
-            resp.getWriter().write(json);
-            resp.setStatus(200);
+            if(reimbursementList.size() > 0){
+                String json = objectMapper.writeValueAsString(reimbursementList);
+                resp.getWriter().write(json);
+                resp.setStatus(200);
+            }else{
+                resp.setStatus(204);
+            }
         }else if (user != null && user.getRole_id() != 1){
             resp.setStatus(403);
         }else{
@@ -104,18 +119,20 @@ public class ReimbursementController {
 
     }
 
-    public void getReimbursementFromId(HttpServletRequest req, HttpServletResponse resp){
+    public void getReimbursementFromId(HttpServletRequest req, HttpServletResponse resp, int requestedId){
         User user = SessionUtil.getUserFromSession(req);
-        log.info("Getting reimbursement with loggedin user: " + user);
         if(user != null){
+            log.info(String.format("Getting reimbursement with loggedin user: %s", user.toString()));
+
             try {
-                String requestBody = RequestUtil.ReadRequestBody(req);
                 ObjectMapper objectMapper = new ObjectMapper();
-                JsonNode parent = objectMapper.readTree(requestBody);
-                int requestedUserId = parent.path("requestedUserId").asInt();
-                if(user.getId() == requestedUserId || user.getRole_id() == 1){
-                    String json = objectMapper.writeValueAsString(reimbursementQueryService.getReimbursementsFromAuthor(requestedUserId));
-                    log.info(String.format("Reimbursements from User with ID #%d\n%s", requestedUserId, json));
+                if(user.getId() == requestedId || user.getRole_id() == 1){
+                    List<Reimbursement> reimbursementList = reimbursementQueryService.getReimbursementsFromAuthor(requestedId);
+                    for(Reimbursement r:reimbursementList){
+                        log.info(String.format("Reimbursement %s", r));
+                    }
+                    String json = objectMapper.writeValueAsString(reimbursementQueryService.getReimbursementsFromAuthor(requestedId));
+                    log.info(String.format("Reimbursements from User with ID #%d%n%s", requestedId, json));
                     resp.getWriter().write(json);
                     resp.setStatus(200);
                 }else{
