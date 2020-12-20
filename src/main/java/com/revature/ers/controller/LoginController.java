@@ -1,5 +1,6 @@
 package com.revature.ers.controller;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.model.User;
 import com.revature.ers.model.dto.LoginDTO;
@@ -27,12 +28,23 @@ public class LoginController {
     public void login(HttpServletRequest req, HttpServletResponse resp) throws IOException {
 
         log.info("Attempting login");
+        String body = RequestUtil.ReadRequestBody(req);
+
+        if(body == null || body.length() < 1) {
+            resp.setStatus(204);
+        }
 
         if (req.getMethod().equalsIgnoreCase("POST")) {
-            String body = RequestUtil.ReadRequestBody(req);
             log.info("Request Body: " + body);
 
-            LoginDTO loginDTO = objectMapper.readValue(body, LoginDTO.class);
+            LoginDTO loginDTO = null;
+            try{
+                loginDTO = objectMapper.readValue(body, LoginDTO.class);
+            } catch (JsonProcessingException e) {
+                log.error(e.getMessage(), e);
+                resp.setStatus(400);
+                return;
+            }
             User user = userQueryService.getUserFromLogin(loginDTO.username, loginDTO.password);
             String loggedIn = "{\"loggedUser\":\"" + user.getFirst_name() + "_" + user.getLast_name() + "\"}";
 
