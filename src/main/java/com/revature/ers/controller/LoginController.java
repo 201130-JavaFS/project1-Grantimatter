@@ -46,9 +46,10 @@ public class LoginController {
                 return;
             }
             User user = userQueryService.getUserFromLogin(loginDTO.username, loginDTO.password);
-            String loggedIn = "{\"loggedUser\":\"" + user.getFirst_name() + "_" + user.getLast_name() + "\"}";
 
             if (user != null) {
+                String loggedIn = "{\"loggedUser\":\"" + user.getFirst_name() + "_" + user.getLast_name() + "\"}";
+
                 SessionUtil.setupLoginSession(req, user);
                 String name = String.format("%s_%s", user.getFirst_name(), user.getLast_name()).trim();
 
