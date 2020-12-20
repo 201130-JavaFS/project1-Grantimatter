@@ -85,7 +85,7 @@ class Navbar{
     }
 }
 
-let nav = new Navbar("Wiswell", ()=>window.open("home.html", "_self"));
+let nav = new Navbar("ERS", ()=>window.open("home.html", "_self"));
 nav.addLeftListItem("Home", ()=>window.open("home.html", "_self"));
 
 async function createLoginButton(){
