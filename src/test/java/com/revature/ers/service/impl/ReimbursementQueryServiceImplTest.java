@@ -17,7 +17,7 @@ class ReimbursementQueryServiceImplTest {
 
     UserQueryService userQueryService = new UserQueryServiceImpl();
     ReimbursementQueryService reimbursementQueryService = new ReimbursementQueryServiceImpl();
-
+/*
     @Test
     void testGetReimbursementsFromAuthor() {
         List<Reimbursement> reimbursementList = new ArrayList<>();
@@ -54,4 +54,6 @@ class ReimbursementQueryServiceImplTest {
             log.info(String.format("ALL REIMBURSEMENTS: %S", r));
         }
     }
+
+ */
 }

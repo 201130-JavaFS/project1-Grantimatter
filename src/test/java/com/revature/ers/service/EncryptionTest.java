@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 public class EncryptionTest {
 
     Logger log = LogManager.getLogger(EncryptionTest.class);
-
+/*
     @Test
     public void TestEncryption(){
         String salt = Encryption.getSalt(30);
@@ -19,5 +19,7 @@ public class EncryptionTest {
         log.info(String.format("Encrypted: %s", encrypted));
         log.info(String.format("Generated Salt: %s", salt));
     }
+
+ */
 
 }
