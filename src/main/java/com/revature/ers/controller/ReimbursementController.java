@@ -137,7 +137,7 @@ public class ReimbursementController {
                 if(user.getId() == requestedId || user.getRole_id() == 1){
                     List<Reimbursement> reimbursementList = reimbursementQueryService.getReimbursementsFromAuthor(requestedId);
                     for(Reimbursement r:reimbursementList){
-                        log.info(String.format("Reimbursement %s", r));
+                        log.info(String.format("Reimbursement #%d", r.getId()));
                     }
                     String json = objectMapper.writeValueAsString(reimbursementList);
                     log.info(String.format("%d reimbursement requests found for user with ID #%d", reimbursementList.size(), requestedId));
