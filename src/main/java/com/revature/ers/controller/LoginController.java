@@ -35,8 +35,6 @@ public class LoginController {
         }
 
         if (req.getMethod().equalsIgnoreCase("POST")) {
-            log.info("Request Body: " + body);
-
             LoginDTO loginDTO = null;
             try{
                 loginDTO = objectMapper.readValue(body, LoginDTO.class);
@@ -67,7 +65,6 @@ public class LoginController {
                 if(user != null){
                     UserDTO userDTO = new UserDTO(String.format("%s_%s", user.getFirst_name(), user.getLast_name()), user.getRole_id(), user.getId());
                     String userJson = objectMapper.writeValueAsString(userDTO);
-                    log.info("userJson: " + userJson);
                     resp.getWriter().write(userJson);
                     resp.setStatus(200);
                 }

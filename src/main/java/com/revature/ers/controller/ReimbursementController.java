@@ -93,7 +93,7 @@ public class ReimbursementController {
                 }
 
                 if(created){
-                    log.info(String.format("New Reimbursement Created: %s", reimbursement));
+                    log.info(String.format("New Reimbursement Created for User %s: %d", user.getEmail(), reimbursement.getId()));
                     resp.setStatus(201);
                 }else{
                     resp.setStatus(200);
@@ -130,7 +130,7 @@ public class ReimbursementController {
     public void getReimbursementFromId(HttpServletRequest req, HttpServletResponse resp, int requestedId){
         User user = SessionUtil.getUserFromSession(req);
         if(user != null){
-            log.info(String.format("Getting reimbursement with loggedin user: %s", user.toString()));
+            log.info(String.format("Getting reimbursement with loggedin user: %s", user.getEmail()));
 
             try {
                 ObjectMapper objectMapper = new ObjectMapper();
@@ -139,8 +139,8 @@ public class ReimbursementController {
                     for(Reimbursement r:reimbursementList){
                         log.info(String.format("Reimbursement %s", r));
                     }
-                    String json = objectMapper.writeValueAsString(reimbursementQueryService.getReimbursementsFromAuthor(requestedId));
-                    log.info(String.format("Reimbursements from User with ID #%d%n%s", requestedId, json));
+                    String json = objectMapper.writeValueAsString(reimbursementList);
+                    log.info(String.format("%d reimbursement requests found for user with ID #%d", requestedId));
                     resp.getWriter().write(json);
                     resp.setStatus(200);
                 }else{

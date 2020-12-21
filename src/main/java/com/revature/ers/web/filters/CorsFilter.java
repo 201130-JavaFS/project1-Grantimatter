@@ -28,7 +28,7 @@ public class CorsFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 
-        log.info("CORS Filter leveraged");
+//        log.info("CORS Filter leveraged");
 
         if(!(response instanceof HttpServletResponse)) {
             chain.doFilter(request, response);

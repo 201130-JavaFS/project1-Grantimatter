@@ -37,9 +37,9 @@ public class SessionUtil {
             String last_name = session.getAttribute("user_last_name").toString();
             String user_email = session.getAttribute("user_email").toString();
             User user = new User(id, role_id, username, first_name, last_name, user_email);
-            log.info("Session User: " + user);
 
             if(user != null) {
+                log.info(String.format("User \"%s\" retrieved from session", user.getEmail()));
                 return user;
             }else{
                 session.invalidate();

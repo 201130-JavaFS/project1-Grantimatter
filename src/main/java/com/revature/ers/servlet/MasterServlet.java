@@ -24,7 +24,7 @@ public class MasterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.info(String.format("Someone's trying to get here! %s", req.getRemoteAddr()));
+        log.info(String.format("Request from IP: %s", req.getRemoteAddr()));
         resp.setContentType("application/json");
         resp.setStatus(404);
 
@@ -32,10 +32,12 @@ public class MasterServlet extends HttpServlet {
         List<String> commandList = new ArrayList<>(Arrays.asList(URI.split("/")));
         commandList.removeAll(Arrays.asList("", null));
         commandList.remove(0);
-        //String[] commands = URI.split("/");
+        String commandString = "";
         for(String c:commandList){
-            log.info("Command List: " + c);
+            commandString += c.toString() + ", ";
         }
+        log.info(commandString);
+
 
         if(commandList.size() > 0){
             switch(commandList.get(0)){
