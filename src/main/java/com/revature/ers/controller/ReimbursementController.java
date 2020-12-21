@@ -140,7 +140,7 @@ public class ReimbursementController {
                         log.info(String.format("Reimbursement %s", r));
                     }
                     String json = objectMapper.writeValueAsString(reimbursementList);
-                    log.info(String.format("%d reimbursement requests found for user with ID #%d", requestedId));
+                    log.info(String.format("%d reimbursement requests found for user with ID #%d", reimbursementList.size(), requestedId));
                     resp.getWriter().write(json);
                     resp.setStatus(200);
                 }else{
