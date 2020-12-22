@@ -6,14 +6,8 @@ import com.revature.ers.dao.impl.UpdateReimbursementDaoImpl;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Reimbursement;
 import com.revature.ers.service.UpdateReimbursementService;
-import com.revature.ers.service.impl.util.ReadRequest;
-import com.revature.ers.servlet.util.SessionUtil;
-import com.revature.ers.servlet.util.UserUtil;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;;
-
-import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
+import org.apache.logging.log4j.Logger;
 
 public class UpdateReimbursementServiceImpl implements UpdateReimbursementService {
     Logger log = LogManager.getLogger(UpdateReimbursementServiceImpl.class);
@@ -22,6 +16,9 @@ public class UpdateReimbursementServiceImpl implements UpdateReimbursementServic
 
     @Override
     public boolean createReimbursementMin(Reimbursement reimbursement) throws ErsException {
+        if(reimbursement.getAmount().floatValue() <= 0){
+            throw new ErsException("Must use positive reimbursement amount!");
+        }
         try{
             log.info("New Reimbursement! " + reimbursement);
             return updateReimbursementDao.createReimbursementMin(reimbursement);
@@ -33,6 +30,9 @@ public class UpdateReimbursementServiceImpl implements UpdateReimbursementServic
 
     @Override
     public boolean createReimbursement(Reimbursement reimbursement) throws ErsException {
+        if(reimbursement.getAmount().floatValue() <= 0){
+            throw new ErsException("Must use positive reimbursement amount!");
+        }
         try{
             log.info("New Reimbursement! " + reimbursement);
             return updateReimbursementDao.createReimbursement(reimbursement);

@@ -18,6 +18,6 @@ public class ReimbursementQueries {
     // UPDATES
     public static final String CREATE_REIMBURSEMENT = "INSERT INTO ers_reimbursement (reimb_amount, reimb_author, reimb_type_id, reimb_description) VALUES (?,?,?,?);";
     public static final String CREATE_REIMBURSEMENT_MIN = "INSERT INTO ers_reimbursement (reimb_amount, reimb_author, reimb_type_id) VALUES (?,?,?);";
-    public static final String APPROVE_REIMBURSEMENT = "UPDATE ers_reimbursement SET reimb_status_id=1, reimb_resolver=?, reimb_resolved=current_timestamp WHERE reimb_id=?";
-    public static final String DENY_REIMBURSEMENT = "UPDATE ers_reimbursement SET reimb_status_id=2, reimb_resolver=?, reimb_resolved=current_timestamp WHERE reimb_id=?";
+    public static final String APPROVE_REIMBURSEMENT = "UPDATE ers_reimbursement SET reimb_status_id=1, reimb_resolver=?, reimb_resolved=current_timestamp WHERE reimb_id=? AND reimb_resolved IS null";
+    public static final String DENY_REIMBURSEMENT = "UPDATE ers_reimbursement SET reimb_status_id=2, reimb_resolver=?, reimb_resolved=current_timestamp WHERE reimb_id=? AND reimb_resolved IS null";
 }

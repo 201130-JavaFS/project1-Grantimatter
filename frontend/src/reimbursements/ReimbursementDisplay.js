@@ -16,12 +16,12 @@ user.done((data, textStatus, jqXHR) => {
     }
 });
 
-user.fail(()=>{
+user.fail(() => {
     window.open('login.html', '_self');
     console.log("User failed to login!");
 });
 
-function getMyReimbursements(requestedUserId){
+function getMyReimbursements(requestedUserId) {
     $.ajax({
         url: baseUrl + 'reimbursements/' + requestedUserId,
         xhrFields: { withCredentials: true },
@@ -38,7 +38,7 @@ function getMyReimbursements(requestedUserId){
         $('#my-reimbursements').show();
         setupEvents();
 
-        if($('#reimb_table_body').children().length > 0){
+        if ($('#reimb_table_body').children().length > 0) {
             $('#reimb_table').show();
         }
     });
@@ -51,18 +51,18 @@ function getOtherReimbursements() {
         xhrFields: { withCredentials: true },
         method: 'GET',
         dataType: 'json'
-    }).done((data, textStatus, jqXHR)=>{
+    }).done((data, textStatus, jqXHR) => {
         console.log('Found reimbursements!');
-        for(const reimbursement of data){
+        for (const reimbursement of data) {
             let reimb = new Reimbursement(reimbursement.id, reimbursement.amount, reimbursement.author, reimbursement.resolver,
                 _.startCase(_.toLower(reimbursement.status)), _.startCase(_.toLower(reimbursement.type)), reimbursement.description, reimbursement.submitted, reimbursement.resolved);
             addOtherReimbursement(reimb, 'other_reimb_table_body');
         }
 
         $('#other-reimb-tab').show();
-        
+
         setupSelection();
-    }).fail(()=>{
+    }).fail(() => {
         console.log('Failed to find any reimbursements');
     });
 
@@ -70,10 +70,10 @@ function getOtherReimbursements() {
 
 function addMyReimbursement(reimbursement, table_body_id) {
     let resolved = 'N/A';
-    if(reimbursement.resolved != null){
+    if (reimbursement.resolved != null) {
         resolved = new Date(reimbursement.resolved).toUTCString();
     }
-    $('#'+table_body_id).append(
+    $('#' + table_body_id).append(
         $('<tr></tr>')
             .addClass(getStatusClass(reimbursement.status))
             .append(createData(reimbursement.id))
@@ -89,14 +89,14 @@ function addMyReimbursement(reimbursement, table_body_id) {
 
 function addOtherReimbursement(reimbursement, table_body_id) {
     let resolved = 'N/A';
-    if(reimbursement.resolved != null){
+    if (reimbursement.resolved != null) {
         resolved = new Date(reimbursement.resolved).toUTCString();
     }
 
     let id = createData(reimbursement.id);
     id.classList.add('id');
 
-    $('#'+table_body_id).append(
+    $('#' + table_body_id).append(
         $('<tr></tr>')
             .addClass(getStatusClass(reimbursement.status))
             .append(createCheckbox(reimbursement.status))
@@ -112,13 +112,13 @@ function addOtherReimbursement(reimbursement, table_body_id) {
     );
 }
 
-function createCheckbox(status){
-    if(status == 'Pending'){
+function createCheckbox(status) {
+    if (status == 'Pending') {
         let inputElement = document.createElement('input');
         inputElement.type = 'checkbox';
         return createData(inputElement.outerHTML);
     }
-    
+
     return createData('');
 }
 
@@ -138,22 +138,22 @@ function createData(innerHTML) {
     return cell;
 }
 
-function setupSelection(){
-    $('td').parent().on('click', function(){
+function setupSelection() {
+    $('td').parent().on('click', function () {
         console.log("Clicked on row");
         let $checkbox = $(this).find('input[type=checkbox]');
 
-        $checkbox.prop('checked', function(i, checked){
+        $checkbox.prop('checked', function (i, checked) {
             $(this).parent().parent().toggleClass('selected');
             return !checked;
         });
     });
 }
 
-function setupEvents(){
-    $('.table-row').on('mouseenter mouseleave', function(){
+function setupEvents() {
+    $('.table-row').on('mouseenter mouseleave', function () {
         console.log('mouse entered or left the element');
-        if(!$(this).hasClass('selected')){
+        if (!$(this).hasClass('selected')) {
             $(this).toggleClass('hover');
         }
     });
