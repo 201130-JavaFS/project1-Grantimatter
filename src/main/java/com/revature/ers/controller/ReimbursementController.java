@@ -58,7 +58,7 @@ public class ReimbursementController {
                             try{
                                 int id = Integer.parseInt(commandList.get(0));
                                 if(id > 0){
-                                    getReimbursementFromId(req, resp, id);
+                                    getReimbursementsFromAuthor(req, resp, id);
                                 }
                             } catch (NumberFormatException e) {
                                 log.error(e.getMessage(), e);
@@ -151,7 +151,7 @@ public class ReimbursementController {
         }
     }
 
-    public void getReimbursementFromId(HttpServletRequest req, HttpServletResponse resp, int requestedId){
+    public void getReimbursementsFromAuthor(HttpServletRequest req, HttpServletResponse resp, int requestedId){
         User user = SessionUtil.getUserFromSession(req);
         if(user != null){
             log.info(String.format("Getting reimbursement with loggedin user: %s", user.getEmail()));
@@ -177,10 +177,6 @@ public class ReimbursementController {
         }else{
             resp.setStatus(401);
         }
-    }
-
-    public void getReimbursementsFromAuthor(int author_id){
-        reimbursementQueryService.getReimbursementsFromAuthor(author_id);
     }
 
     public void updateReimbursement(HttpServletRequest req, HttpServletResponse resp, int id, String newStatus){
