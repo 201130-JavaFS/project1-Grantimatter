@@ -9,12 +9,10 @@ import org.junit.jupiter.api.Test;
 class UserQueryServiceImplTest {
     Logger log = LogManager.getLogger(UserQueryServiceImplTest.class);
     UserQueryService userQueryService = new UserQueryServiceImpl();
-/*
+
     @Test
     void testGetUserFromLogin() {
         User grant = userQueryService.getUserFromLogin("grant.wiswell", "password");
         if(grant != null) log.info("User Grant: " + grant);
     }
-
- */
 }

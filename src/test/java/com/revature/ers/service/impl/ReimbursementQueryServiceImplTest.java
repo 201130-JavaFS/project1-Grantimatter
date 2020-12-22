@@ -9,51 +9,55 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.List;
 
-class ReimbursementQueryServiceImplTest {
+public class ReimbursementQueryServiceImplTest {
     Logger log = LogManager.getLogger(ReimbursementQueryServiceImplTest.class);
 
     UserQueryService userQueryService = new UserQueryServiceImpl();
     ReimbursementQueryService reimbursementQueryService = new ReimbursementQueryServiceImpl();
-/*
+
     @Test
-    void testGetReimbursementsFromAuthor() {
-        List<Reimbursement> reimbursementList = new ArrayList<>();
+    public void testGetReimbursementsFromId(){
+        try{
+            Reimbursement reimbursement = reimbursementQueryService.getReimbursementFromId(48);
+        } catch (ErsException e) {
+            log.error(e.getMessage(), e);
+        }
+    }
+
+    @Test
+    public void testGetReimbursementsFromAuthor() {
         try{
             User grant = userQueryService.getUserFromLogin("grant.wiswell","password");
             if(grant != null){
-                reimbursementList = reimbursementQueryService.getReimbursementsFromAuthor(grant.getId());
+                List<Reimbursement> reimbursementList = reimbursementQueryService.getReimbursementsFromAuthor(grant.getId());
+                for (Reimbursement r:reimbursementList) {
+                    assert(r != null);
+                    log.info(r);
+                }
             }
         } catch (ErsException e) {
             log.error(e.getMessage(), e);
         }
-        //assert(reimbursementList.size() > 0);
 
-        for (Reimbursement r:reimbursementList) {
-            assert(r != null);
-            log.info(r);
-        }
-
-       // Reimbursement newReimbursement = reimbursementQueryService.getReimbursementFromId(62);
-       // log.info(String.format("Reimbursement found with id %d %s", newReimbursement.getId(), newReimbursement));
+        List<Reimbursement> reimbursementList = reimbursementQueryService.getReimbursementsFromAuthor(1);
     }
 
     @Test
-    void testGetReimbursementsFromStatus(){
+    public void testGetReimbursementsFromStatus(){
         List<Reimbursement> reimbursementList = reimbursementQueryService.getReimbursementFromStatus(0);
+        List<Reimbursement> reimbursementListFail = reimbursementQueryService.getReimbursementFromStatus(9);
+        //assert(reimbursementListFail == null);
         assert(reimbursementList.size() > 0);
     }
 
     @Test
-    void testGetAllReimbursements(){
+    public void testGetAllReimbursements(){
         List<Reimbursement> reimbursementList = reimbursementQueryService.getAllReimbursements();
-        //assert(reimbursementList.size() > 0);
+        assert(reimbursementList.size() > 0);
         for(Reimbursement r:reimbursementList){
             log.info(String.format("ALL REIMBURSEMENTS: %S", r));
         }
     }
-
- */
 }
