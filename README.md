@@ -1,6 +1,6 @@
 # Employee Reimbursment System (ERS)
 
-##A fully operational webapp accessible from anywhere on the planet! (when using Mozilla Firefox)
+## A fully operational webapp accessible from anywhere on the planet! (when using Mozilla Firefox)
 
 ### Try it out by following this link! 
 [javafs-ers.s3.us-east-2.amazonaws.com](http://javafs-ers.s3.us-east-2.amazonaws.com/login.html)
