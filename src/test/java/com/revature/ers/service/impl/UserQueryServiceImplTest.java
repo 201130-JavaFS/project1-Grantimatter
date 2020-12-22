@@ -5,6 +5,7 @@ import com.revature.ers.service.UserQueryService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
 class UserQueryServiceImplTest {
     Logger log = LogManager.getLogger(UserQueryServiceImplTest.class);
@@ -13,6 +14,6 @@ class UserQueryServiceImplTest {
     @Test
     void testGetUserFromLogin() {
         User grant = userQueryService.getUserFromLogin("grant.wiswell", "password");
-        if(grant != null) log.info("User Grant: " + grant);
+        assertNotNull(grant);
     }
 }

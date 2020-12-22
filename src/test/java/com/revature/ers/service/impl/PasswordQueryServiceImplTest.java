@@ -8,14 +8,14 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class PasswordQueryServiceImplTest {
+class PasswordQueryServiceImplTest {
 
     static Logger log = LogManager.getLogger(PasswordQueryServiceImplTest.class);
     PasswordQueryService passwordQueryService = new PasswordQueryServiceImpl();
 
     @Test
-    public void getPasswordFromUserId() {
+    void getPasswordFromUserId() {
         Password password = passwordQueryService.getPasswordFromUserId(1);
-        log.info(password);
+        assertNotNull(password);
     }
 }

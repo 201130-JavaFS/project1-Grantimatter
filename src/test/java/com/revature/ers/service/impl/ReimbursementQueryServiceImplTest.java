@@ -8,32 +8,35 @@ import com.revature.ers.service.UserQueryService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class ReimbursementQueryServiceImplTest {
+class ReimbursementQueryServiceImplTest {
     Logger log = LogManager.getLogger(ReimbursementQueryServiceImplTest.class);
 
     UserQueryService userQueryService = new UserQueryServiceImpl();
     ReimbursementQueryService reimbursementQueryService = new ReimbursementQueryServiceImpl();
 
     @Test
-    public void testGetReimbursementsFromId(){
+    void testGetReimbursementsFromId(){
         try{
             Reimbursement reimbursement = reimbursementQueryService.getReimbursementFromId(48);
+            assertNotNull(reimbursement);
         } catch (ErsException e) {
             log.error(e.getMessage(), e);
         }
     }
 
     @Test
-    public void testGetReimbursementsFromAuthor() {
+    void testGetReimbursementsFromAuthor() {
         try{
             User grant = userQueryService.getUserFromLogin("grant.wiswell","password");
             if(grant != null){
                 List<Reimbursement> reimbursementList = reimbursementQueryService.getReimbursementsFromAuthor(grant.getId());
                 for (Reimbursement r:reimbursementList) {
-                    assert(r != null);
+                    assertNotNull(r);
                     log.info(r);
                 }
             }
@@ -45,18 +48,19 @@ public class ReimbursementQueryServiceImplTest {
     }
 
     @Test
-    public void testGetReimbursementsFromStatus(){
+    void testGetReimbursementsFromStatus(){
         List<Reimbursement> reimbursementList = reimbursementQueryService.getReimbursementFromStatus(0);
         List<Reimbursement> reimbursementListFail = reimbursementQueryService.getReimbursementFromStatus(9);
-        //assert(reimbursementListFail == null);
-        //assert(reimbursementList.size() > 0);
+        assertNotNull(reimbursementList);
+        assertEquals(reimbursementListFail, new ArrayList<>());
     }
 
     @Test
-    public void testGetAllReimbursements(){
+    void testGetAllReimbursements(){
         List<Reimbursement> reimbursementList = reimbursementQueryService.getAllReimbursements();
         assert(reimbursementList.size() > 0);
         for(Reimbursement r:reimbursementList){
+            assertNotNull(r);
             log.info(String.format("ALL REIMBURSEMENTS: %S", r));
         }
     }

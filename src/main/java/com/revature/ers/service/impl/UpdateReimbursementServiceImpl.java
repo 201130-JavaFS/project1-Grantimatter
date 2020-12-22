@@ -16,11 +16,12 @@ public class UpdateReimbursementServiceImpl implements UpdateReimbursementServic
 
     @Override
     public boolean createReimbursementMin(Reimbursement reimbursement) throws ErsException {
-        if(reimbursement.getAmount().floatValue() <= 0){
+        if(reimbursement.getAmount() == null || reimbursement.getAmount().floatValue() <= 0){
             throw new ErsException("Must use positive reimbursement amount!");
         }
+        log.info("New Reimbursement! " + reimbursement);
+
         try{
-            log.info("New Reimbursement! " + reimbursement);
             return updateReimbursementDao.createReimbursementMin(reimbursement);
         } catch (ErsException e) {
             log.warn(e.getMessage(), e);
@@ -30,11 +31,11 @@ public class UpdateReimbursementServiceImpl implements UpdateReimbursementServic
 
     @Override
     public boolean createReimbursement(Reimbursement reimbursement) throws ErsException {
-        if(reimbursement.getAmount().floatValue() <= 0){
+        if(reimbursement.getAmount() == null || reimbursement.getAmount().floatValue() <= 0){
             throw new ErsException("Must use positive reimbursement amount!");
         }
+        log.info("New Reimbursement! " + reimbursement);
         try{
-            log.info("New Reimbursement! " + reimbursement);
             return updateReimbursementDao.createReimbursement(reimbursement);
         } catch (ErsException e) {
             log.warn(e.getMessage(), e);
