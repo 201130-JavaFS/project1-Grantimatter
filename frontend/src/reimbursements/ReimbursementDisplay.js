@@ -4,12 +4,14 @@ import { baseUrl } from '../fetch/FetchUtil.js';
 import { Reimbursement } from '../reimbursements/ReimbursementUtil.js';
 import { User, user } from '../util/User.js'
 
+let userId;
+
 user.done((data, textStatus, jqXHR) => {
     console.log("User again: " + data.full_name);
     let currentUser = new User(data.full_name, data.role_id, data.id);
     console.log('Created new user!' + JSON.stringify(currentUser));
-
-    getMyReimbursements(currentUser.user_id);
+    userId = currentUser.user_id
+    getMyReimbursements(userId);
 
     if (data.role_id === 1) {
         getOtherReimbursements();
@@ -55,7 +57,7 @@ function getOtherReimbursements() {
         console.log('Found reimbursements!');
         for (const reimbursement of data) {
             let reimb = new Reimbursement(reimbursement.id, reimbursement.amount, reimbursement.author, reimbursement.resolver,
-                _.startCase(_.toLower(reimbursement.status)), _.startCase(_.toLower(reimbursement.type)), reimbursement.description, reimbursement.submitted, reimbursement.resolved);
+                _.startCase(_.toLower(reimbursement.status)), _.startCase(_.toLower(reimbursement.type)), reimbursement.description, reimbursement.submitted, reimbursement.resolved, reimbursement.author_id);
             addOtherReimbursement(reimb, 'other_reimb_table_body');
         }
 
@@ -99,7 +101,7 @@ function addOtherReimbursement(reimbursement, table_body_id) {
     $('#' + table_body_id).append(
         $('<tr></tr>')
             .addClass(getStatusClass(reimbursement.status))
-            .append(createCheckbox(reimbursement.status))
+            .append(createCheckbox(reimbursement))
             .append(id)
             .append(createData(reimbursement.author))
             .append(createData('$' + Number(reimbursement.amount).toFixed(2)))
@@ -112,8 +114,8 @@ function addOtherReimbursement(reimbursement, table_body_id) {
     );
 }
 
-function createCheckbox(status) {
-    if (status == 'Pending') {
+function createCheckbox(reimbursement) {
+    if (reimbursement.status == 'Pending' && reimbursement.author_id != userId) {
         let inputElement = document.createElement('input');
         inputElement.type = 'checkbox';
         return createData(inputElement.outerHTML);

@@ -3,7 +3,7 @@ import $ from 'jquery';
 export {Reimbursement};
 
 class Reimbursement{
-    constructor(id, amount, author, resolver, status, type, description, submitted, resolved){
+    constructor(id, amount, author, resolver, status, type, description, submitted, resolved, author_id){
         this.id = id;
         this.author = author;
         this.resolver = resolver;
@@ -13,6 +13,7 @@ class Reimbursement{
         this.description = description;
         this.submitted = submitted;
         this.resolved = resolved;
+        this.author_id = author_id;
     }
     static amountTypeDescriptInstance(amount, type, description){
         return new Reimbursement(null, amount, null, null, null, type, description, null, null);
