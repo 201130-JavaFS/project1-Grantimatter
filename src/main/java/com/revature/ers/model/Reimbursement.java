@@ -18,6 +18,10 @@ public class Reimbursement {
     String status;
     String type;
     String description;
+    int status_id;
+    int type_id;
+    int author_id;
+    int resolver_id;
     Date submitted;
     Date resolved;
 
@@ -27,6 +31,13 @@ public class Reimbursement {
 
     public Reimbursement(int id) {
         this.id = id;
+    }
+
+    public Reimbursement(BigDecimal amount, int type_id, int author_id, String description) {
+        this.amount = amount;
+        this.type_id = type_id;
+        this.author_id = author_id;
+        this.description = description;
     }
 
     public Reimbursement(BigDecimal amount, String author, String type) {
@@ -133,17 +144,57 @@ public class Reimbursement {
         this.type = type;
     }
 
+    public int getStatus_id() {
+        return status_id;
+    }
+
+    public void setStatus_id(int status_id) {
+        this.status_id = status_id;
+    }
+
+    public int getType_id() {
+        return type_id;
+    }
+
+    public void setType_id(int type_id) {
+        this.type_id = type_id;
+    }
+
+    public void setSubmitted(Date submitted) {
+        this.submitted = submitted;
+    }
+
+    public void setResolved(Date resolved) {
+        this.resolved = resolved;
+    }
+
+    public int getAuthor_id() {
+        return author_id;
+    }
+
+    public void setAuthor_id(int author_id) {
+        this.author_id = author_id;
+    }
+
+    public int getResolver_id() {
+        return resolver_id;
+    }
+
+    public void setResolver_id(int resolver_id) {
+        this.resolver_id = resolver_id;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Reimbursement that = (Reimbursement) o;
-        return id == that.id && Objects.equals(amount, that.amount) && Objects.equals(author, that.author) && Objects.equals(resolver, that.resolver) && Objects.equals(status, that.status) && Objects.equals(type, that.type) && Objects.equals(description, that.description) && Objects.equals(submitted, that.submitted) && Objects.equals(resolved, that.resolved);
+        return id == that.id && status_id == that.status_id && type_id == that.type_id && author_id == that.author_id && resolver_id == that.resolver_id && Objects.equals(amount, that.amount) && Objects.equals(author, that.author) && Objects.equals(resolver, that.resolver) && Objects.equals(status, that.status) && Objects.equals(type, that.type) && Objects.equals(description, that.description) && Objects.equals(submitted, that.submitted) && Objects.equals(resolved, that.resolved);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, amount, author, resolver, status, type, description, submitted, resolved);
+        return Objects.hash(id, amount, author, resolver, status, type, description, status_id, type_id, author_id, resolver_id, submitted, resolved);
     }
 
     @Override
@@ -156,6 +207,10 @@ public class Reimbursement {
                 ", status='" + status + '\'' +
                 ", type='" + type + '\'' +
                 ", description='" + description + '\'' +
+                ", status_id=" + status_id +
+                ", type_id=" + type_id +
+                ", author_id=" + author_id +
+                ", resolver_id=" + resolver_id +
                 ", submitted=" + submitted +
                 ", resolved=" + resolved +
                 '}';

@@ -103,7 +103,9 @@ public class ReimbursementController {
     private void createNewReimbursement(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         log.info("Creating new Reimbursement!");
         User user = SessionUtil.getUserFromSession(req);
-        Reimbursement reimbursement = new ObjectMapper().readValue(RequestUtil.ReadRequestBody(req), Reimbursement.class);
+        ReimbursementDTO reimbursementDTO = new ObjectMapper().readValue(RequestUtil.ReadRequestBody(req), ReimbursementDTO.class);
+        int type_id = 0;
+        Reimbursement reimbursement = new Reimbursement(reimbursementDTO.amount, reimbursementDTO.getType_id(), user.getId(), reimbursementDTO.getDescription());
         reimbursement.setAuthor(user.getEmail());
         log.info(String.format("New Reimbursement: %s", reimbursement));
         if(user != null && reimbursement != null){
@@ -187,7 +189,7 @@ public class ReimbursementController {
             if(user != null && user.getRole_id() == 1){
                 Reimbursement reimbursement = reimbursementQueryService.getReimbursementFromId(id);
                 if(reimbursement.getAuthor() != user.getEmail()) {
-                    reimbursement.setResolver(user.getEmail());
+                    reimbursement.setResolver_id(user.getId());
 
                     if(newStatus.equalsIgnoreCase("approved")){
                         updateReimbursementService.approveReimbursement(reimbursement);

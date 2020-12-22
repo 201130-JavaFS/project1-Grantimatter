@@ -42,7 +42,6 @@ public class ReimbursementUtil {
                 if (resultSet.next()) {
                     return getReimbursementFromResultSet(resultSet);
                 }
-
             } catch (SQLException e) {
                 log.error(e.getMessage());
             }
