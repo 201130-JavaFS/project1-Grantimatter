@@ -38,7 +38,7 @@ export function logout(){
         method: 'GET',
         dataType: 'json'
     }).always(()=>{
-        window.open('home.html', '_self');
+        window.open('login.html', '_self');
     });
 }
 

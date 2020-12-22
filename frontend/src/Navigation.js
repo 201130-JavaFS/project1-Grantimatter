@@ -1,6 +1,5 @@
 import $ from 'jquery';
 import _ from 'lodash';
-//import {user} from './util/User.js';
 import {baseUrl} from './fetch/FetchUtil.js';
 import {logout} from './Login.js';
 import './style.css';

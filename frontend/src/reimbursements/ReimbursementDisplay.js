@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import _ from 'lodash';
 import { baseUrl } from '../fetch/FetchUtil.js';
 import { Reimbursement } from '../reimbursements/ReimbursementUtil.js';
 import { User, user } from '../util/User.js'
@@ -29,8 +30,10 @@ function getMyReimbursements(requestedUserId){
         dataType: 'json'
     }).done(function (data, textStatus, jqXHR) {
         for (const reimbursement of data) {
-            addMyReimbursement(reimbursement, 'reimb_table_body');
-        } 
+            let reimb = new Reimbursement(reimbursement.id, reimbursement.amount, reimbursement.author, reimbursement.resolver,
+                _.startCase(_.toLower(reimbursement.status)), _.startCase(_.toLower(reimbursement.type)), reimbursement.description, reimbursement.submitted, reimbursement.resolved);
+            addMyReimbursement(reimb, 'reimb_table_body');
+        }
 
         $('#my-reimbursements').show();
         setupEvents();
@@ -51,39 +54,43 @@ function getOtherReimbursements() {
     }).done((data, textStatus, jqXHR)=>{
         console.log('Found reimbursements!');
         for(const reimbursement of data){
-            addOtherReimbursement(reimbursement, 'other_reimb_table_body');
+            let reimb = new Reimbursement(reimbursement.id, reimbursement.amount, reimbursement.author, reimbursement.resolver,
+                _.startCase(_.toLower(reimbursement.status)), _.startCase(_.toLower(reimbursement.type)), reimbursement.description, reimbursement.submitted, reimbursement.resolved);
+            addOtherReimbursement(reimb, 'other_reimb_table_body');
         }
-        $('#other-reimb-tab').show();        
+
+        $('#other-reimb-tab').show();
+        
         setupSelection();
     }).fail(()=>{
         console.log('Failed to find any reimbursements');
     });
-}
 
+}
 
 function addMyReimbursement(reimbursement, table_body_id) {
     let resolved = 'N/A';
     if(reimbursement.resolved != null){
-        resolved = new Date(reimbursement.resolved).toUTCString;
+        resolved = new Date(reimbursement.resolved).toUTCString();
     }
     $('#'+table_body_id).append(
         $('<tr></tr>')
-            .addClass(getStatusClass(reimbursement.status_id))
+            .addClass(getStatusClass(reimbursement.status))
             .append(createData(reimbursement.id))
             .append(createData('$' + Number(reimbursement.amount).toFixed(2)))
-            .append(createData(Reimbursement.getStatus(reimbursement.status_id)))
-            .append(createData(Reimbursement.getType(reimbursement.type_id)))
+            .append(createData(reimbursement.status))
+            .append(createData(reimbursement.type))
             .append(createData(reimbursement.description))
             .append(createData(new Date(reimbursement.submitted).toUTCString()))
             .append(createData(resolved))
-            .append(createData(reimbursement.resolver_id > 0 ? reimbursement.resolver_id : 'N/A'))
+            .append(createData(resolved != 'N/A' ? reimbursement.resolver : 'N/A'))
     );
 }
 
 function addOtherReimbursement(reimbursement, table_body_id) {
     let resolved = 'N/A';
     if(reimbursement.resolved != null){
-        resolved = new Date(reimbursement.resolved).toUTCString;
+        resolved = new Date(reimbursement.resolved).toUTCString();
     }
 
     let id = createData(reimbursement.id);
@@ -91,22 +98,22 @@ function addOtherReimbursement(reimbursement, table_body_id) {
 
     $('#'+table_body_id).append(
         $('<tr></tr>')
-            .addClass(getStatusClass(reimbursement.status_id))
-            .append(createCheckbox(reimbursement.status_id))
+            .addClass(getStatusClass(reimbursement.status))
+            .append(createCheckbox(reimbursement.status))
             .append(id)
-            .append(createData(reimbursement.author_id))
+            .append(createData(reimbursement.author))
             .append(createData('$' + Number(reimbursement.amount).toFixed(2)))
-            .append(createData(Reimbursement.getStatus(reimbursement.status_id)))
-            .append(createData(Reimbursement.getType(reimbursement.type_id)))
+            .append(createData(reimbursement.status))
+            .append(createData(reimbursement.type))
             .append(createData(reimbursement.description))
             .append(createData(new Date(reimbursement.submitted).toUTCString()))
             .append(createData(resolved))
-            .append(createData(reimbursement.resolver_id > 0 ? reimbursement.resolver_id : 'N/A'))
+            .append(createData(resolved != 'N/A' ? reimbursement.resolver : 'N/A'))
     );
 }
 
-function createCheckbox(status_id){
-    if(status_id === 0){
+function createCheckbox(status){
+    if(status == 'Pending'){
         let inputElement = document.createElement('input');
         inputElement.type = 'checkbox';
         return createData(inputElement.outerHTML);
@@ -115,11 +122,11 @@ function createCheckbox(status_id){
     return createData('');
 }
 
-function getStatusClass(status_id) {
-    switch (status_id) {
-        case 0: return 'table-row reimb-pending';
-        case 1: return 'table-row reimb-approved';
-        case 2: return 'table-row reimb-denied';
+function getStatusClass(status) {
+    switch (status) {
+        case 'Pending': return 'table-row reimb-pending';
+        case 'Approved': return 'table-row reimb-approved';
+        case 'Denied': return 'table-row reimb-denied';
     }
 }
 
@@ -145,6 +152,7 @@ function setupSelection(){
 
 function setupEvents(){
     $('.table-row').on('mouseenter mouseleave', function(){
+        console.log('mouse entered or left the element');
         if(!$(this).hasClass('selected')){
             $(this).toggleClass('hover');
         }

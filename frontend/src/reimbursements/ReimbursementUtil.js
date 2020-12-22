@@ -3,13 +3,13 @@ import $ from 'jquery';
 export {Reimbursement};
 
 class Reimbursement{
-    constructor(id, amount, author_id, resolver_id, status_id, type_id, description, submitted, resolved){
+    constructor(id, amount, author, resolver, status, type, description, submitted, resolved){
         this.id = id;
-        this.author_id = author_id;
-        this.resolver_id = resolver_id;
+        this.author = author;
+        this.resolver = resolver;
         this.amount = amount;
-        this.status_id = status_id;
-        this.type_id = type_id;
+        this.status = status;
+        this.type = type;
         this.description = description;
         this.submitted = submitted;
         this.resolved = resolved;
@@ -20,19 +20,19 @@ class Reimbursement{
     static amountTypeInstance(amount, type){
         return new Reimbursement(null, amount, null, null, null, type, null, null, null);
     }
-    static notResolved(id, amount, author_id, resolver_id, status_id, type_id, description, submitted){
-        return new Reimbursement(id, amount, author_id, resolver_id, status_id, type_id, description, submitted, null);
+    static notResolved(id, amount, author, resolver, status, type, description, submitted){
+        return new Reimbursement(id, amount, author, resolver, status, type, description, submitted, null);
     }
 
-    static getStatus(status_id){
-        switch(status_id){
+    static getStatus(status){
+        switch(status){
             case 0: return 'Pending';
             case 1: return 'Approved';
             case 2: return 'Denied';
         }
     }
-    static getType(type_id){
-        switch(type_id){
+    static getType(type){
+        switch(type){
             case 0: return 'Lodging';
             case 1: return 'Travel';
             case 2: return 'Food';
