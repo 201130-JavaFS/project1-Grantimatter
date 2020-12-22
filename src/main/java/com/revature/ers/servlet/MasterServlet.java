@@ -32,7 +32,7 @@ public class MasterServlet extends HttpServlet {
         commandList.removeAll(Arrays.asList("", null));
         commandList.remove(0);
         String commandString = "";
-        for(String c:commandList){
+        for(String c:commandList) {
             commandString += c.toString() + ", ";
         }
         log.info(commandString);

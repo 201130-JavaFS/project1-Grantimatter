@@ -22,10 +22,12 @@ public class ReimbursementUtil {
                         resultSet.getInt("reimb_id"),
                         resultSet.getBigDecimal("reimb_amount"),
                         resultSet.getInt("reimb_author"),
+                        resultSet.getInt("reimb_resolver"),
                         resultSet.getInt("reimb_type_id"),
-                        resultSet.getString("reimb_description"),
                         resultSet.getInt("reimb_status_id"),
-                        resultSet.getTimestamp("reimb_submitted")
+                        resultSet.getString("reimb_description"),
+                        resultSet.getTimestamp("reimb_submitted"),
+                        resultSet.getTimestamp("reimb_resolved")
                 );
             } catch (SQLException e) {
                 log.error(e.getMessage());

@@ -82,19 +82,15 @@ public class ReimbursementController {
     }
 
     private void doPut(HttpServletRequest req, HttpServletResponse resp){
-        List<String> commandList = new ArrayList<>(Arrays.asList(req.getRequestURI().split("/")));
-        commandList.removeAll(Arrays.asList("", null));
-        commandList.remove(0);
-        commandList.remove(0);
         log.info("Putting Reimbursements!");
         try{
             User user = SessionUtil.getUserFromSession(req);
             String requestBody = RequestUtil.ReadRequestBody(req);
             ReimbursementDTO reimbursementDTO = objectMapper.readValue(requestBody, ReimbursementDTO.class);
-            log.info("ReimbursementDTO recieved: " + reimbursementDTO);
+            log.info("ReimbursementDTO received: " + reimbursementDTO);
             if(reimbursementDTO != null){
-                for(int id: reimbursementDTO.getIdList()){
-                    updateReimbursement(id, reimbursementDTO.getNewStatus());
+                for(int id: reimbursementDTO.getIdList()) {
+                    updateReimbursement(req, resp, id, reimbursementDTO.getNewStatus());
                 }
 
                 resp.getWriter().write("{\"status\":\"success\"}");
@@ -187,11 +183,31 @@ public class ReimbursementController {
         reimbursementQueryService.getReimbursementsFromAuthor(author_id);
     }
 
-    public void updateReimbursement(int id, String newStatus){
-        if(newStatus.equalsIgnoreCase("approved")){
-            updateReimbursementService.approveReimbursement(new Reimbursement(id));
-        }else if(newStatus.equalsIgnoreCase("denied")){
-            updateReimbursementService.denyReimbursement(new Reimbursement(id));
+    public void updateReimbursement(HttpServletRequest req, HttpServletResponse resp, int id, String newStatus){
+        try{
+            User user = SessionUtil.getUserFromSession(req);
+            if(user != null && user.getRole_id() == 1){
+                Reimbursement reimbursement = reimbursementQueryService.getReimbursementFromId(id);
+                if(reimbursement.getAuthor_id() != user.getRole_id()){
+                    reimbursement.setResolver_id(user.getId());
+
+                    if(newStatus.equalsIgnoreCase("approved")){
+                        updateReimbursementService.approveReimbursement(reimbursement);
+                    }else if(newStatus.equalsIgnoreCase("denied")){
+                        updateReimbursementService.denyReimbursement(reimbursement);
+                    }
+
+                    resp.setStatus(200);
+                }else{
+                    log.info("User tried resolving their own request");
+                    resp.setStatus(403);
+                }
+
+
+            }
+        } catch (ErsException e) {
+            log.error(e.getMessage(), e);
         }
+
     }
 }
