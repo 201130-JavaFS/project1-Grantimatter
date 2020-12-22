@@ -188,7 +188,7 @@ public class ReimbursementController {
             User user = SessionUtil.getUserFromSession(req);
             if(user != null && user.getRole_id() == 1){
                 Reimbursement reimbursement = reimbursementQueryService.getReimbursementFromId(id);
-                if(reimbursement.getAuthor_id() != user.getId()) {
+                if(reimbursement.getAuthor_id() > 0 && (reimbursement.getAuthor_id() != user.getId())) {
                     reimbursement.setResolver_id(user.getId());
 
                     if(newStatus.equalsIgnoreCase("approved")){

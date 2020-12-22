@@ -22,6 +22,7 @@ public class ReimbursementUtil {
                         resultSet.getInt("reimb_id"),
                         resultSet.getBigDecimal("reimb_amount"),
                         resultSet.getString("reimb_author"),
+                        resultSet.getInt("reimb_author_id"),
                         resultSet.getString("reimb_resolver"),
                         resultSet.getString("reimb_type"),
                         resultSet.getString("reimb_status"),

@@ -4,7 +4,7 @@ public class ReimbursementQueries {
     // QUERIES
     //public static final String GET_REIMBURSEMENT_DATA = "SELECT r.reimb_id, r.reimb_amount, r.reimb_author, r.reimb_type_id, r.reimb_description, r.reimb_status_id, r.reimb_submitted, r.reimb_resolved, r.reimb_resolver FROM ers_reimbursement AS r ";
     public static final String GET_REIMBURSEMENT_DATA =
-            "SELECT r.reimb_id, r.reimb_amount, ua.user_email AS reimb_author , rt.reimb_type, r.reimb_description, rs.reimb_status, r.reimb_submitted, r.reimb_resolved, ur.user_email AS reimb_resolver " +
+            "SELECT r.reimb_id, r.reimb_amount, ua.user_email AS reimb_author , rt.reimb_type, r.reimb_description, rs.reimb_status, r.reimb_submitted, r.reimb_resolved, r.reimb_author AS reimb_author_id, ur.user_email AS reimb_resolver " +
                     "FROM ers_reimbursement AS r " +
                     "LEFT JOIN ers_reimbursement_status AS rs ON r.reimb_status_id = rs.reimb_status_id " +
                     "LEFT JOIN ers_reimbursement_type AS rt ON r.reimb_type_id = rt.reimb_type_id " +

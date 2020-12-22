@@ -66,8 +66,9 @@ public class Reimbursement {
         this.submitted = submitted;
     }
 
-    public Reimbursement(int id, BigDecimal amount, String author, String resolver, String type, String status, String description, Timestamp submitted, Timestamp resolved) {
+    public Reimbursement(int id, BigDecimal amount, String author, int author_id, String resolver, String type, String status, String description, Timestamp submitted, Timestamp resolved) {
         this(id, amount, author, type, description, status, submitted);
+        this.author_id = author_id;
         this.resolver = resolver;
         this.resolved = resolved;
     }
