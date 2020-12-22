@@ -1,6 +1,5 @@
 package com.revature.ers.controller;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Reimbursement;
@@ -105,10 +104,10 @@ public class ReimbursementController {
         log.info("Creating new Reimbursement!");
         User user = SessionUtil.getUserFromSession(req);
         Reimbursement reimbursement = new ObjectMapper().readValue(RequestUtil.ReadRequestBody(req), Reimbursement.class);
-        reimbursement.setAuthor_id(user.getId());
+        reimbursement.setAuthor(user.getEmail());
         log.info(String.format("New Reimbursement: %s", reimbursement));
         if(user != null && reimbursement != null){
-            if(reimbursement.getAuthor_id() == user.getId() || user.getRole_id() == 1){
+            if(reimbursement.getAuthor() == user.getEmail() || user.getRole_id() == 1){
                 boolean created = false;
                 if(reimbursement.getDescription() != null && reimbursement.getDescription().length() > 0){
                     created = updateReimbursementService.createReimbursement(reimbursement);
@@ -148,7 +147,6 @@ public class ReimbursementController {
         }else{
             resp.setStatus(401);
         }
-
     }
 
     public void getReimbursementFromId(HttpServletRequest req, HttpServletResponse resp, int requestedId){
@@ -188,8 +186,8 @@ public class ReimbursementController {
             User user = SessionUtil.getUserFromSession(req);
             if(user != null && user.getRole_id() == 1){
                 Reimbursement reimbursement = reimbursementQueryService.getReimbursementFromId(id);
-                if(reimbursement.getAuthor_id() != user.getId()){
-                    reimbursement.setResolver_id(user.getId());
+                if(reimbursement.getAuthor() != user.getEmail()) {
+                    reimbursement.setResolver(user.getEmail());
 
                     if(newStatus.equalsIgnoreCase("approved")){
                         updateReimbursementService.approveReimbursement(reimbursement);
@@ -202,8 +200,6 @@ public class ReimbursementController {
                     log.info("User tried resolving their own request");
                     resp.setStatus(403);
                 }
-
-
             }
         } catch (ErsException e) {
             log.error(e.getMessage(), e);

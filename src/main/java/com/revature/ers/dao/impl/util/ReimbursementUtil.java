@@ -21,10 +21,10 @@ public class ReimbursementUtil {
                 reimbursement = new Reimbursement(
                         resultSet.getInt("reimb_id"),
                         resultSet.getBigDecimal("reimb_amount"),
-                        resultSet.getInt("reimb_author"),
-                        resultSet.getInt("reimb_resolver"),
-                        resultSet.getInt("reimb_type_id"),
-                        resultSet.getInt("reimb_status_id"),
+                        resultSet.getString("reimb_author"),
+                        resultSet.getString("reimb_resolver"),
+                        resultSet.getString("reimb_type"),
+                        resultSet.getString("reimb_status"),
                         resultSet.getString("reimb_description"),
                         resultSet.getTimestamp("reimb_submitted"),
                         resultSet.getTimestamp("reimb_resolved")

@@ -2,20 +2,20 @@ package com.revature.ers.dao.queries;
 
 public class ReimbursementQueries {
     // QUERIES
-    public static final String GET_REIMBURSEMENT_DATA = "SELECT r.reimb_id, r.reimb_amount, r.reimb_author, r.reimb_type_id, r.reimb_description, r.reimb_status_id, r.reimb_submitted, r.reimb_resolved, r.reimb_resolver FROM ers_reimbursement AS r ";
+    //public static final String GET_REIMBURSEMENT_DATA = "SELECT r.reimb_id, r.reimb_amount, r.reimb_author, r.reimb_type_id, r.reimb_description, r.reimb_status_id, r.reimb_submitted, r.reimb_resolved, r.reimb_resolver FROM ers_reimbursement AS r ";
+    public static final String GET_REIMBURSEMENT_DATA =
+            "SELECT r.reimb_id, r.reimb_amount, ua.user_email AS reimb_author , rt.reimb_type, r.reimb_description, rs.reimb_status, r.reimb_submitted, r.reimb_resolved, ur.user_email AS reimb_resolver " +
+                    "FROM ers_reimbursement AS r " +
+                    "JOIN ers_reimbursement_status AS rs ON r.reimb_status_id = rs.reimb_status_id " +
+                    "JOIN ers_reimbursement_type AS rt ON r.reimb_type_id = rt.reimb_type_id " +
+                    "JOIN ers_users AS ua ON r.reimb_author = ua.ers_users_id " +
+                    "JOIN ers_users AS ur ON r.reimb_resolver = ur.ers_users_id ";
     public static final String GET_REIMBURSEMENT_FROM_ID = GET_REIMBURSEMENT_DATA + "WHERE r.reimb_id=?;";
     public static final String GET_REIMBURSEMENT_FROM_AUTHOR_ID = GET_REIMBURSEMENT_DATA + "WHERE r.reimb_author=?;";
     public static final String GET_REIMBURSEMENT_FROM_STATUS_ID = GET_REIMBURSEMENT_DATA + "WHERE r.reimb_status_id=?";
     public static final String GET_ALL_REIMBURSEMENTS = GET_REIMBURSEMENT_DATA;
 
-    public static final String GET_REIMBURSEMENT_DATA_PRETTY =
-            "SELECT r.reimb_id, r.reimb_amount, ua.user_email AS reimb_author , rt.reimb_type, r.reimb_description, rs.reimb_status, r.reimb_submitted, r.reimb_resolved, ur.user_email AS reimb_resolver \n" +
-            "FROM ers_reimbursement AS r\n" +
-            "JOIN ers_reimbursement_status AS rs ON r.reimb_status_id = rs.reimb_status_id\n" +
-            "JOIN ers_reimbursement_type AS rt ON r.reimb_type_id = rt.reimb_type_id\n" +
-            "JOIN ers_users AS ua ON r.reimb_author = ua.ers_users_id \n" +
-            "JOIN ers_users AS ur ON r.reimb_resolver = ur.ers_users_id \n" +
-            "WHERE r.reimb_author = 1;";
+
 
     // UPDATES
     public static final String CREATE_REIMBURSEMENT = "INSERT INTO ers_reimbursement (reimb_amount, reimb_author, reimb_type_id, reimb_description) VALUES (?,?,?,?);";

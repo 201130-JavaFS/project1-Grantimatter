@@ -15,7 +15,7 @@ public class UpdateReimbursementDaoImpl implements UpdateReimbursementDao {
     @Override
     public boolean createReimbursementMin(Reimbursement reimbursement) throws ErsException {
         try{
-            return Queries.sendUpdate(ReimbursementQueries.CREATE_REIMBURSEMENT_MIN, reimbursement.getAmount(), reimbursement.getAuthor_id(), reimbursement.getType_id()) > 0;
+            return Queries.sendUpdate(ReimbursementQueries.CREATE_REIMBURSEMENT_MIN, reimbursement.getAmount(), reimbursement.getAuthor(), reimbursement.getType()) > 0;
         } catch (Exception e) {
             log.error(e);
         }
@@ -25,7 +25,7 @@ public class UpdateReimbursementDaoImpl implements UpdateReimbursementDao {
     @Override
     public boolean createReimbursement(Reimbursement reimbursement) throws ErsException {
         try{
-            return Queries.sendUpdate(ReimbursementQueries.CREATE_REIMBURSEMENT, reimbursement.getAmount(), reimbursement.getAuthor_id(), reimbursement.getType_id(), reimbursement.getDescription()) > 0;
+            return Queries.sendUpdate(ReimbursementQueries.CREATE_REIMBURSEMENT, reimbursement.getAmount(), reimbursement.getAuthor(), reimbursement.getType(), reimbursement.getDescription()) > 0;
         } catch (Exception e) {
             log.error(e);
         }
@@ -35,7 +35,7 @@ public class UpdateReimbursementDaoImpl implements UpdateReimbursementDao {
     @Override
     public boolean approveReimbursement(Reimbursement reimbursement) throws ErsException {
         try{
-            return Queries.sendUpdate(ReimbursementQueries.APPROVE_REIMBURSEMENT, reimbursement.getResolver_id(), reimbursement.getId()) > 0;
+            return Queries.sendUpdate(ReimbursementQueries.APPROVE_REIMBURSEMENT, reimbursement.getResolver(), reimbursement.getId()) > 0;
         } catch (Exception e) {
             log.error(e.getMessage(), e);
         }
@@ -45,7 +45,7 @@ public class UpdateReimbursementDaoImpl implements UpdateReimbursementDao {
     @Override
     public boolean denyReimbursement(Reimbursement reimbursement) throws ErsException {
         try {
-            return Queries.sendUpdate(ReimbursementQueries.DENY_REIMBURSEMENT, reimbursement.getResolver_id(), reimbursement.getId()) > 0;
+            return Queries.sendUpdate(ReimbursementQueries.DENY_REIMBURSEMENT, reimbursement.getResolver(), reimbursement.getId()) > 0;
         } catch (Exception e) {
             e.printStackTrace();
         }
