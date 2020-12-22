@@ -41,9 +41,9 @@ public class CorsFilter implements Filter {
         HttpServletResponse res = (HttpServletResponse) response;
 
         // Use for deployment
-        //res.setHeader("Access-Control-Allow-Origin", "http://javafs-ers.s3.us-east-2.amazonaws.com"); // Allow S3 Bucket connection
+        res.setHeader("Access-Control-Allow-Origin", "http://javafs-ers.s3.us-east-2.amazonaws.com"); // Allow S3 Bucket connection
         // Use for local
-        res.setHeader("Access-Control-Allow-Origin", "null"); // Allow any connection
+        //res.setHeader("Access-Control-Allow-Origin", "null"); // Allow any connection
 
         res.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, HEAD");
         // Allow specific HTTP Verbs
