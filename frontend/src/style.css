@@ -6,7 +6,7 @@ body{
 
 #main{
     display: grid;
-    grid-template-columns: 15% 70% 15%;
+    grid-template-columns: 10% 80% 10%;
     justify-self: center;
     padding: 16px;
     margin: 0px 20px;
@@ -37,32 +37,47 @@ hr.solid {
     border-top: 2px solid #646464;
 }
 
-.reimb-approved{
-    background-color:  #395739;
+.table-row.reimb-approved{
+    background-color:  #404e40;
 }
 
-.reimb-approved{
-    background-color: #395739;
+.table-row.reimb-approved.hover{
+    background-color: #426442;
 }
 
-.reimb-approved-active{
-    background-color: #426442
+.table-row.selected{
+    outline: 1px solid white;
+    outline-offset: -1px;
 }
 
-.reimb-denied{
+.table-row.reimb-approved.selected{
+    background-color:  #669966;
+    outline: 2px solid lime;
+    outline-offset: -2px;
+}
+
+.table-row.reimb-denied{
     background-color: #533d3d;
 }
 
-.reimb-denied-active{
+.table-row.reimb-denied.hover{
     background-color: #644242;
 }
 
-.row-hover{
-    background-color: #343a40;
+.table-row.reimb-denied.selected{
+    background-color: #b47373;
+    outline: 2px solid red;
+    outline-offset: -2px;
 }
 
-.row-hover-active{
+.table-row.hover{
     background-color: #3d444b;
+}
+
+.table-row.selected{
+    background-color: #626e7a;
+    outline: 2px solid white;
+    outline-offset: -2px;
 }
 
 .dark-background{

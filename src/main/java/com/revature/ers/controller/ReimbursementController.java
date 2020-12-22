@@ -2,8 +2,10 @@ package com.revature.ers.controller;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.ers.exception.ErsException;
 import com.revature.ers.model.Reimbursement;
 import com.revature.ers.model.User;
+import com.revature.ers.model.dto.ReimbursementDTO;
 import com.revature.ers.service.ReimbursementQueryService;
 import com.revature.ers.service.UpdateReimbursementService;
 import com.revature.ers.service.impl.ReimbursementQueryServiceImpl;
@@ -30,20 +32,22 @@ public class ReimbursementController {
 
     public void reimbursements(HttpServletRequest req, HttpServletResponse resp) {
         if(req.getMethod().equalsIgnoreCase("GET")) {
+            log.info("GET Reimbursement request received");
             doGet(req, resp);
         }else if(req.getMethod().equalsIgnoreCase("POST")){
+            log.info("POST Reimbursement request received");
             doPost(req, resp);
+        }else if(req.getMethod().equalsIgnoreCase("PUT")){
+            log.info("PUT Reimbursement request received");
+            doPut(req, resp);
         }
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp){
-        String URI = req.getRequestURI();
-        //String[] commands = URI.split("/");
-        List<String> commandList = new ArrayList<>(Arrays.asList(URI.split("/")));
+        List<String> commandList = new ArrayList<>(Arrays.asList(req.getRequestURI().split("/")));
         commandList.removeAll(Arrays.asList("", null));
         commandList.remove(0);
         commandList.remove(0);
-        log.info("Reimbursements URI: " + commandList);
         if(commandList.size() > 0){
             try{
                 switch (commandList.get(0)) {
@@ -54,7 +58,7 @@ public class ReimbursementController {
                         if(commandList.size() > 0){
                             try{
                                 int id = Integer.parseInt(commandList.get(0));
-                                if(id > -1){
+                                if(id > 0){
                                     getReimbursementFromId(req, resp, id);
                                 }
                             } catch (NumberFormatException e) {
@@ -74,6 +78,30 @@ public class ReimbursementController {
             createNewReimbursement(req, resp);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void doPut(HttpServletRequest req, HttpServletResponse resp){
+        List<String> commandList = new ArrayList<>(Arrays.asList(req.getRequestURI().split("/")));
+        commandList.removeAll(Arrays.asList("", null));
+        commandList.remove(0);
+        commandList.remove(0);
+        log.info("Putting Reimbursements!");
+        try{
+            User user = SessionUtil.getUserFromSession(req);
+            String requestBody = RequestUtil.ReadRequestBody(req);
+            ReimbursementDTO reimbursementDTO = objectMapper.readValue(requestBody, ReimbursementDTO.class);
+            log.info("ReimbursementDTO recieved: " + reimbursementDTO);
+            if(reimbursementDTO != null){
+                for(int id: reimbursementDTO.getIdList()){
+                    updateReimbursement(id, reimbursementDTO.getNewStatus());
+                }
+
+                resp.getWriter().write("{\"status\":\"success\"}");
+                resp.setStatus(200);
+            }
+        } catch (ErsException | IOException e) {
+            log.warn(e.getMessage(), e);
         }
     }
 
@@ -159,7 +187,11 @@ public class ReimbursementController {
         reimbursementQueryService.getReimbursementsFromAuthor(author_id);
     }
 
-    public void getReimbursementsFromResolver(int resolver_id){
-
+    public void updateReimbursement(int id, String newStatus){
+        if(newStatus.equalsIgnoreCase("approved")){
+            updateReimbursementService.approveReimbursement(new Reimbursement(id));
+        }else if(newStatus.equalsIgnoreCase("denied")){
+            updateReimbursementService.denyReimbursement(new Reimbursement(id));
+        }
     }
 }

@@ -24,7 +24,6 @@ public class MasterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        log.info(String.format("Request from IP: %s", req.getRemoteAddr()));
         resp.setContentType("application/json");
         resp.setStatus(404);
 
@@ -59,6 +58,11 @@ public class MasterServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doGet(req, resp);
+    }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         doGet(req, resp);
     }
 }

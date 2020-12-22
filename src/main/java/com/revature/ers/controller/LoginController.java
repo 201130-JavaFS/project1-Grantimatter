@@ -52,8 +52,8 @@ public class LoginController {
                 String name = String.format("%s_%s", user.getFirst_name(), user.getLast_name()).trim();
 
                 log.info(loggedIn);
-                resp.setStatus(200);
                 resp.getWriter().write(loggedIn);
+                resp.setStatus(200);
             } else {
                 resp.setStatus(401);
             }

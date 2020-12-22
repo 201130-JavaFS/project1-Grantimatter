@@ -27,6 +27,10 @@ public class Reimbursement {
 
     }
 
+    public Reimbursement(int id) {
+        this.id = id;
+    }
+
     public Reimbursement(BigDecimal amount, int author_id, int type_id) {
         this.amount = amount;
         this.author_id = author_id;

@@ -5,7 +5,7 @@ module.exports = {
     mode: 'development',
     entry: {
         navigation: './src/Navigation.js',
-        reimbursements: ['./src/reimbursements/ReimbursementUtil.js', './src/reimbursements/CreateReimbursement.js' , './src/reimbursements/ReimbursementDisplay.js'],
+        reimbursements: ['./src/reimbursements/ReimbursementUtil.js', './src/reimbursements/CreateReimbursement.js' , './src/reimbursements/ReimbursementDisplay.js', './src/reimbursements/UpdateReimbursements.js'],
         login: ['./src/Login.js', './src/LoginModal.js'],
     },
     plugins: [

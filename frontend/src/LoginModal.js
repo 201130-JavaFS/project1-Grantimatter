@@ -22,8 +22,6 @@ function createLoginModal(){
 
 function createLoginForm(){
     let loginform = document.createElement("form");
-    loginform.action = "submit-login";
-    loginform.method = "post";
 
     return loginform;
 }
