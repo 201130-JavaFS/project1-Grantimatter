@@ -1,39 +1,48 @@
-# Employee Reimbursment System (ERS)
+# Expense Reimbursement System
 
-## A fully operational webapp accessible from anywhere on the planet! (when using Mozilla Firefox)
+Author: ***Grant Wiswell***
 
-### Try it out by following this link! 
-[javafs-ers.s3.us-east-2.amazonaws.com](http://javafs-ers.s3.us-east-2.amazonaws.com/login.html)
+----
 
-## Executive Summary
-The Expense Reimbursement System (ERS) will manage the process of reimbursing employees for expenses incurred while on company time. All employees in the company can login and submit requests for reimbursement and view their past tickets and pending requests. Finance managers can log in and view all reimbursement requests and past history for all employees in the company. Finance managers are authorized to approve and deny requests for expense reimbursement.
+## Description
 
-**State-chart Diagram (Reimbursement Statuses)** 
-![](./imgs/state-chart.jpg)
+   The Expense Reimbursement System (ERS) manages the process of reimbursing employees for expenses incurred while on company time. All employees in the company can login and submit requests for reimbursement and view their past tickets and pending requests. Finance managers can log in and view all reimbursement requests and past history for all employees in the company. Finance managers are authorized to approve and deny requests for expense reimbursement.
 
-**Reimbursement Types**
+----
 
-Employees must select the type of reimbursement as: LODGING, TRAVEL, FOOD, or OTHER.
+## Technologies Used
 
-**Logical Model**
-![](./imgs/logical.jpg)
+* JDBC
+* PostgreSQL
+* Angular
+* Apcache Tomcat
+* Docker
+* Jenkins
+* Node.js
 
-**Physical Model**
-![](./imgs/physical.jpg)
+- AWS
+    * EC2
+    * RDS
+    * S3
 
-**Use Case Diagram**
-![](./imgs/use-case.jpg)
+____
 
-**Activity Diagram**
-![](./imgs/activity.jpg)
+## Features
 
-## Technical Requirements
+- Users can login and apply for an expense reimbursement, creating a ticket.
 
-The back-end system shall use JDBC to connect to a Postgres database. The application shall deploy onto a Tomcat Server. The middle tier shall use Servlet technology for dynamic Web application development. The front-end view shall use HTML/CSS/JavaScript to make an application that can call server-side components in a generally RESTful manner. Passwords shall be encrypted in Java and securely stored in the database. The middle tier shall follow proper layered architecture, have reasonable (~70%) test coverage of the service layer, and implement log4j for appropriate logging. Webpages shall be styled to be functional and readable. 
+- Customers can view past reimbursement requests and filter by status (Pending, Accepted, or Denied)
 
-**Stretch Goals:**
-* Replace JDBC with Hibernate to manage the database connection.
-* Users can upload a document or image of their receipt when submitting reimbursements which can stored in the database and reviewed by a financial manager.
-* Postgres Database shall be hosted remotely on an AWS RDS. 
-* Java application shall be hosted remotely on an EC2.
-* Static files (webpages) shall be hosted on an S3 bucket. 
+- A finance manager can view all reimbursement requests and approve or deny unresolved requests.
+
+## Usage
+
+> To get started using the Expense Reimbursement System, simply run `git clone https://github.com/201130-JavaFS/project1-Grantimatter` and open the `/project/` directory in your favorite Maven-supporting IDE, build, and run.
+
+Alternitively, you can visit [javafs-ers.s3.us-east-2.amazonaws.com](javafs-ers.s3.us-east-2.amazonaws.com) using Mozilla Firefox to view a live example of the application.
+
+----
+
+#### License
+
+This project uses the following license: [MIT License](https://www.mit.edu/~amini/LICENSE.md)
